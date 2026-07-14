@@ -2,9 +2,9 @@
   <div class="NavBar">
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">
+        <router-link class="navbar-brand" :to="{ name: 'homePage' }">
           <img :src="logo" alt="Logo" class="img-fluid" style="width: 120px" />
-        </a>
+        </router-link>
         <button
           class="navbar-toggler me-auto"
           type="button"
