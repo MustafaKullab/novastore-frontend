@@ -1,44 +1,99 @@
-# frontend store
+# NovaStore — Frontend
 
-This template should help get you started developing with Vue 3 in Vite.
+Customer-facing storefront and admin dashboard for **NovaStore**, a full-stack e-commerce platform. Built with Vue 3, Vite, and Pinia, consuming the [NovaStore backend API](https://github.com/MustafaKullab/novastore-backend).
 
-## Recommended IDE Setup
+> 🔗 Backend repository: [novastore-backend](https://github.com/MustafaKullab/novastore-backend)
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+---
 
-## Recommended Browser Setup
+## Features
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+**Storefront**
+- Browse products by category, view product details, search & filter
+- Shopping cart and checkout flow
+- User authentication — sign up, log in, email verification, password reset
+- Order history and order detail tracking
+- User profile management
+- Contact page for customer inquiries
 
-## Customize configuration
+**Admin Dashboard**
+- Overview dashboard with key store metrics
+- Product management — add, edit, delete, image upload
+- Category management
+- Order management — view all orders, update order status
+- User management
+- Customer message inbox with reply functionality
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+## Tech Stack
 
-## Project Setup
+| Layer            | Technology                     |
+|-------------------|---------------------------------|
+| Framework         | Vue 3 (Composition/Options API) |
+| Build Tool        | Vite                             |
+| State Management  | Pinia                             |
+| Routing           | Vue Router                         |
+| Styling           | Bootstrap 5 + Bootstrap Icons        |
+| Notifications     | vue3-toastify                          |
+| Linting/Formatting| ESLint, oxlint, oxfmt                    |
 
-```sh
+## Project Structure
+
+```
+frontend store/
+├── src/
+│   ├── assets/          # Images and static assets
+│   ├── components/      # Reusable UI components (NavBar, Footer, ProductsSection, etc.)
+│   ├── views/            # Page-level components (customer pages + admin pages)
+│   ├── stores/            # Pinia stores (user, products, category)
+│   ├── router/             # Vue Router configuration
+│   └── App.vue               # Root component
+├── public/                       # Static public assets
+├── index.html                     # App entry HTML
+└── vite.config.js                   # Vite configuration
+```
+
+## Getting Started
+
+### Prerequisites
+- Node.js `^22.18.0` or `>=24.12.0`
+- The [NovaStore backend](https://github.com/MustafaKullab/novastore-backend) running locally (default `http://localhost:7000`)
+
+### Installation
+
+```bash
+git clone https://github.com/MustafaKullab/novastore-frontend.git
+cd novastore-frontend
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+### Run the dev server
 
-```sh
+```bash
 npm run dev
 ```
 
-### Compile and Minify for Production
+The app will be available at `http://localhost:5173` by default.
 
-```sh
-npm run build
+### Other scripts
+
+```bash
+npm run build      # Production build
+npm run preview    # Preview the production build locally
+npm run lint        # Lint and auto-fix (oxlint + eslint)
+npm run format        # Format source files with oxfmt
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+## Configuration
 
-```sh
-npm run lint
-```
+The app expects the backend API to be reachable at `http://localhost:7000`. If your backend runs on a different port, update the base URL used in the API calls (`src/stores/*.js` and the `fetchWithRefresh` helper) accordingly.
+
+## Roadmap / Planned Improvements
+
+- Centralize the API base URL into a single environment-based config instead of hardcoded URLs
+- Add route guards (`beforeEach`) to prevent non-admin users from navigating to admin views directly
+- Persist guest cart in client-side storage with merge-on-login
+- Extract shared form validation logic into composables
+
+## Author
+
+**Mustafa Kullab** — Built as a personal project to apply and deepen Vue.js/frontend skills after completing web development fundamentals.
