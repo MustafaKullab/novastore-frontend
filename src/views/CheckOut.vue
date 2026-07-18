@@ -458,7 +458,7 @@ const subtotal = computed(() => {
 
 // Function to send message
 const sendMessage = async (orderId) => {
-  const response = await fetchWithRefresh(`http://localhost:7000/successOrderMessage`, {
+  const response = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/successOrderMessage`, {
     method: "POST",
     body: JSON.stringify({ orderId: orderId }),
     headers: { "Content-Type": "application/json" },
@@ -484,7 +484,7 @@ const placeOrder = async () => {
     alert("Please fill in all required fields.");
     return;
   }
-  const response = await fetchWithRefresh("http://localhost:7000/confOrder", {
+  const response = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/confOrder`, {
     method: "POST",
     credentials: "include",
   });

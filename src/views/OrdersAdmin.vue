@@ -197,7 +197,7 @@
                     </td>
                     <td>
                       <div class="mt-3">
-                        {{ order.createdAt }}
+                        {{ formatDate(order.createdAt) }}
                       </div>
                     </td>
                     <td>
@@ -431,6 +431,7 @@
 </template>
 
 <script setup>
+import { formatDate } from "../../public/formatDate";
 import SideBar from "@/components/SideBar.vue";
 import TopBar from "@/components/TopBar.vue";
 import { useProductsStore } from "@/stores/products";
@@ -470,7 +471,7 @@ const resetFilter = () => {
 
 // Function to update status
 const saveNewStatus = async (orderId) => {
-  const response = await fetchWithRefresh("http://localhost:7000/updateStatucOfOrder", {
+  const response = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/updateStatucOfOrder`, {
     method: "PATCH",
     body: JSON.stringify({ orderId, statusSelected: changeStatus.value }),
     headers: { "Content-Type": "application/json" },
@@ -489,10 +490,13 @@ const saveNewStatus = async (orderId) => {
 
 // Function to delete the order
 const deleteOrder = async (orderId) => {
-  const response = await fetchWithRefresh(`http://localhost:7000/deleteOrder/${orderId}`, {
-    method: "DELETE",
-    credentials: "include",
-  });
+  const response = await fetchWithRefresh(
+    `${import.meta.env.VITE_API_URL}/deleteOrder/${orderId}`,
+    {
+      method: "DELETE",
+      credentials: "include",
+    },
+  );
 
   const data = await response.json();
 

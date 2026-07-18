@@ -384,7 +384,7 @@
                       <button
                         type="button"
                         class="signinBtn btn btn-primary w-100 d-flex align-items-center gap-3 justify-content-center"
-                        @click="goToSifnPage"
+                        @click="goToSignPage"
                         style="background: linear-gradient(180deg, #7d4ada, #5322be)"
                       >
                         <div><i class="bi bi-person-plus-fill"></i></div>
@@ -445,6 +445,9 @@ const quantities = ref({});
 
 // Variable to store the error message
 const quantityMessage = ref({});
+
+// Close button of modal element
+const closeModal = ref(null);
 
 watch(
   quantities,
@@ -510,7 +513,7 @@ const getCategoryCount = (category) => {
 
 // Function to add to cart
 const addToCart = async (product) => {
-  const response = await fetchWithRefresh("http://localhost:7000/addToCart", {
+  const response = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/addToCart`, {
     method: "POST",
     body: JSON.stringify({ productId: product._id, quantity: quantities.value[product._id] }),
     headers: { "Content-Type": "application/json" },
@@ -527,6 +530,12 @@ const addToCart = async (product) => {
   } else {
     quantityMessage.value[product._id] = data.message;
   }
+};
+
+// Function to go signup page
+const goToSignPage = () => {
+  closeModal.value.click();
+  router.push({ name: "signup" });
 };
 
 onMounted(async () => {

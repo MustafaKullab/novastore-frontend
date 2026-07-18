@@ -222,7 +222,7 @@
                       <div class="ps-3 mt-3">{{ getProductCount(category?._id) }}</div>
                     </td>
                     <td>
-                      <div class="mt-3">{{ category.createdAt }}</div>
+                      <div class="mt-3">{{ formatDate(category.createdAt) }}</div>
                     </td>
                     <td>
                       <div
@@ -332,6 +332,7 @@
 </template>
 
 <script setup>
+import { formatDate } from "../../public/formatDate";
 import SideBar from "@/components/SideBar.vue";
 import TopBar from "@/components/TopBar.vue";
 import { useCategoryStore } from "@/stores/category";
@@ -368,7 +369,7 @@ const changeState = async (categoryId) => {
   }
 
   const response = await fetchWithRefresh(
-    `http://localhost:7000/changeStateCategory/${categoryId}`,
+    `${import.meta.env.VITE_API_URL}/changeStateCategory/${categoryId}`,
     {
       method: "PATCH",
       body: JSON.stringify({ status: stateOfCategory.value }),
@@ -407,7 +408,7 @@ const addNewCategory = async () => {
   formData.append("isActive", isActive.value);
   formData.append("image", imgCategory.value.files[0]);
 
-  const response = await fetchWithRefresh("http://localhost:7000/addCategory", {
+  const response = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/addCategory`, {
     method: "POST",
     body: formData,
     credentials: "include",

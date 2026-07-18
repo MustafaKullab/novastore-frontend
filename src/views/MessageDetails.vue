@@ -237,10 +237,13 @@ const reply = ref("");
 
 // Function to delete msg
 const deleteMsg = async () => {
-  const response = await fetchWithRefresh(`http://localhost:7000/deleteMsg/${messageId}`, {
-    method: "DELETE",
-    credentials: "include",
-  });
+  const response = await fetchWithRefresh(
+    `${import.meta.env.VITE_API_URL}/deleteMsg/${messageId}`,
+    {
+      method: "DELETE",
+      credentials: "include",
+    },
+  );
 
   const data = await response.json();
 
@@ -251,16 +254,19 @@ const deleteMsg = async () => {
 
 // Function to send reply
 const sendEmail = async () => {
-  const response = await fetchWithRefresh(`http://localhost:7000/sendReply/${messageId}`, {
-    method: "POST",
-    body: JSON.stringify({
-      fullName: productsStore.specificMessage.fullName,
-      email: productsStore.specificMessage.email,
-      reply: reply.value,
-    }),
-    headers: { "Content-Type": "application/json" },
-    credentials: "include",
-  });
+  const response = await fetchWithRefresh(
+    `${import.meta.env.VITE_API_URL}/sendReply/${messageId}`,
+    {
+      method: "POST",
+      body: JSON.stringify({
+        fullName: productsStore.specificMessage.fullName,
+        email: productsStore.specificMessage.email,
+        reply: reply.value,
+      }),
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+    },
+  );
 
   const data = await response.json();
 

@@ -314,26 +314,21 @@ const cancleProduct = () => {
 const updateProduct = async () => {
   const formData = new FormData();
 
-  let image = ref("");
-
-  if (myFileInput.value.files[0] === "undefined") {
-    image.value = currentImg.value;
-  } else {
-    image.value = myFileInput.value.files[0];
-  }
-
   formData.append("name", productName.value);
   formData.append("description", description.value);
   formData.append("price", price.value);
   formData.append("stock", stock.value);
   formData.append("categoryId", category.value);
-  formData.append("image", image.value);
+  formData.append("image", myFileInput.value.files[0]);
 
-  const response = await fetchWithRefresh(`http://localhost:7000/editProduct/${productId}`, {
-    method: "PUT",
-    body: formData,
-    credentials: "include",
-  });
+  const response = await fetchWithRefresh(
+    `${import.meta.env.VITE_API_URL}/editProduct/${productId}`,
+    {
+      method: "PUT",
+      body: formData,
+      credentials: "include",
+    },
+  );
 
   const data = await response.json();
 
@@ -345,10 +340,13 @@ const updateProduct = async () => {
 
 // Function to delete image from product
 const deleteImgFromProduct = async () => {
-  const response = await fetchWithRefresh(`http://localhost:7000/deleteImgProduct/${productId}`, {
-    method: "PATCH",
-    credentials: "include",
-  });
+  const response = await fetchWithRefresh(
+    `${import.meta.env.VITE_API_URL}/deleteImgProduct/${productId}`,
+    {
+      method: "PATCH",
+      credentials: "include",
+    },
+  );
 
   const data = await response.json();
 

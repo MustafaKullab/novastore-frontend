@@ -174,7 +174,7 @@ const increaseQuantity = async (item) => {
   try {
     loadingInc.value = true;
 
-    const response = await fetchWithRefresh("http://localhost:7000/addToCart", {
+    const response = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/addToCart`, {
       method: "POST",
       body: JSON.stringify({
         productId: item.productId._id,

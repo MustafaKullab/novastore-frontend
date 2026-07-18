@@ -13,7 +13,7 @@
           <div class="boxes row py-3">
             <div class="col-lg-3">
               <div
-                class="totalProducts bg-white px-3 py-4 rounded d-flex gap-2 border mb-3 mb-md-0"
+                class="totalProducts bg-white px-3 py-4 rounded d-flex gap-2 border mb-3 mb-lg-0"
               >
                 <div
                   class="icon rounded-pill border d-flex justify-content-center align-items-center"
@@ -36,7 +36,7 @@
               </div>
             </div>
             <div class="col-lg-3">
-              <div class="totalOrders bg-white px-3 py-4 rounded d-flex gap-2 border mb-3 mb-md-0">
+              <div class="totalOrders bg-white px-3 py-4 rounded d-flex gap-2 border mb-3 mb-lg-0">
                 <div
                   class="icon rounded-pill border d-flex justify-content-center align-items-center"
                   style="
@@ -58,7 +58,7 @@
               </div>
             </div>
             <div class="col-lg-3">
-              <div class="totalUsers bg-white px-3 py-4 rounded d-flex gap-2 border mb-3 mb-md-0">
+              <div class="totalUsers bg-white px-3 py-4 rounded d-flex gap-2 border mb-3 mb-lg-0">
                 <div
                   class="icon rounded-pill border d-flex justify-content-center align-items-center"
                   style="
@@ -80,7 +80,7 @@
               </div>
             </div>
             <div class="col-lg-3">
-              <div class="revenue bg-white px-3 py-4 rounded d-flex gap-2 border mb-3 mb-md-0">
+              <div class="revenue bg-white px-3 py-4 rounded d-flex gap-2 border mb-3 mb-lg-0">
                 <div
                   class="icon rounded-pill border d-flex justify-content-center align-items-center"
                   style="
@@ -151,7 +151,7 @@
                       <td>{{ order.items.length }}</td>
                       <td>
                         <div
-                          class="statusBox p-2 rounded-pill fw-bold"
+                          class="statusBox py-2 px-3 rounded-pill fw-bold"
                           :class="order.status"
                           :style="{
                             backgroundColor:
@@ -179,7 +179,7 @@
                           {{ order.status }}
                         </div>
                       </td>
-                      <td>{{ order.createdAt }}</td>
+                      <td>{{ formatDate(order.createdAt) }}</td>
                       <td class="eye">
                         <i
                           class="bi bi-eye btn btn-light btn-sm"
@@ -267,7 +267,11 @@
                   class="image p-2 rounded border"
                   style="background-color: #f8f8f8; width: fit-content"
                 >
-                  <img src="@/assets/images/books.png" style="width: 70px" alt="product" />
+                  <img
+                    :src="`http://localhost:7000/${product.image}`"
+                    style="width: 70px"
+                    alt="product"
+                  />
                 </div>
                 <div class="details">
                   <div class="productName fw-bold mb-1">{{ product.name }}</div>
@@ -289,6 +293,7 @@
 </template>
 
 <script setup>
+import { formatDate } from "../../public/formatDate";
 import SideBar from "@/components/SideBar.vue";
 import TopBar from "@/components/TopBar.vue";
 import { onMounted } from "vue";
@@ -313,7 +318,7 @@ onMounted(async () => {
 <style lang="scss" scoped>
 .orderMsgContainer,
 .recentMessages {
-  @media (max-width: 1135px) {
+  @media (max-width: 1260px) {
     width: 100% !important;
   }
 }

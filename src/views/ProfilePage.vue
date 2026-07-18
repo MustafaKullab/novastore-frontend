@@ -387,7 +387,7 @@ const toggleEye3 = () => {
 
 // Function to update user name
 const updateUsername = async () => {
-  const response = await fetchWithRefresh("http://localhost:7000/changeUsername", {
+  const response = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/changeUsername`, {
     method: "PATCH",
     body: JSON.stringify({ newUsername: newUserName.value }),
     headers: { "Content-Type": "application/json" },
@@ -423,7 +423,7 @@ watch(confNewPassword, () => {
 
 // Function to update the password
 const updatePassword = async () => {
-  const response = await fetchWithRefresh("http://localhost:7000/resetPassFromProfile", {
+  const response = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/resetPassFromProfile`, {
     method: "POST",
     body: JSON.stringify({
       currentPassword: currentPassword.value,
@@ -454,7 +454,7 @@ const updatePassword = async () => {
 
 // Function to logout user
 const logout = async () => {
-  const response = await fetchWithRefresh("http://localhost:7000/logout", {
+  const response = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/logout`, {
     method: "POST",
     credentials: "include",
   });

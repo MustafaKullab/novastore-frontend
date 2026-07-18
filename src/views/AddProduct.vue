@@ -286,7 +286,7 @@ const saveProduct = async () => {
   formData.append("categoryId", category.value);
   formData.append("image", myFileInput.value.files[0]);
 
-  const response = await fetchWithRefresh("http://localhost:7000/addProduct", {
+  const response = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/addProduct`, {
     method: "POST",
     body: formData,
     credentials: "include",

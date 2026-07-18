@@ -96,7 +96,7 @@
                 </div>
                 <div class="details">
                   <div class="title">Total Categories</div>
-                  <div class="number fs-3 fw-bold">{{ categoriesLength }}</div>
+                  <div class="number fs-3 fw-bold">{{ categoriesStore.categoriesLength }}</div>
                   <div class="state small text-muted">Product categories</div>
                 </div>
               </div>
@@ -209,7 +209,7 @@
                     >
                       {{ product.stock }}
                     </td>
-                    <td>{{ product.createdAt }}</td>
+                    <td>{{ formatDate(product.createdAt) }}</td>
                     <td>
                       <div class="actions d-flex align-items-center gap-1">
                         <router-link
@@ -242,6 +242,7 @@
 </template>
 
 <script setup>
+import { formatDate } from "../../public/formatDate";
 import SideBar from "@/components/SideBar.vue";
 import TopBar from "@/components/TopBar.vue";
 import { useProductsStore } from "@/stores/products";
@@ -273,11 +274,6 @@ const lowStockProducts = computed(() => {
 // Computed to calculate the out of stock products
 const outOfStockProducts = computed(() => {
   return productsStore.products.filter((product) => product.stock === 0).length;
-});
-
-// Computed to calculate the categories of products
-const categoriesLength = computed(() => {
-  return new Set(productsStore.products.map((product) => product.category)).size;
 });
 
 // Computed to filter the products
@@ -312,7 +308,7 @@ const resetFilter = () => {
 
 // Function to delete the product
 const deleteProduct = async (id) => {
-  const response = await fetchWithRefresh(`http://localhost:7000/deleteProduct/${id}`, {
+  const response = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/deleteProduct/${id}`, {
     method: "DELETE",
     credentials: "include",
   });
@@ -330,6 +326,7 @@ onMounted(async () => {
   console.log(productsStore.products);
 
   await categoriesStore.getCategories();
+  await categoriesStore.getCategoriesLength();
 });
 </script>
 

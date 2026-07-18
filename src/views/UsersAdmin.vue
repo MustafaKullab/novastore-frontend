@@ -155,7 +155,7 @@
                     </td>
                     <td>
                       <div class="mt-3">
-                        {{ user.joinedAt }}
+                        {{ formatDate(user.joinedAt) }}
                       </div>
                     </td>
                     <td>
@@ -186,6 +186,7 @@
 </template>
 
 <script setup>
+import { formatDate } from "../../public/formatDate";
 import SideBar from "@/components/SideBar.vue";
 import TopBar from "@/components/TopBar.vue";
 import { useUserStore } from "@/stores/user";
@@ -211,7 +212,7 @@ const filteringUsers = computed(() => {
 
 // Function to delete user
 const deleteUser = async (id) => {
-  const response = await fetchWithRefresh(`http://localhost:7000/deleteUser/${id}`, {
+  const response = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/deleteUser/${id}`, {
     method: "DELETE",
     credentials: "include",
   });

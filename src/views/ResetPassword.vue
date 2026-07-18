@@ -170,7 +170,7 @@ const userId = route.query.userId;
 
 // Function to handle with code verification
 const handleResetPassword = async () => {
-  const response = await fetch("http://localhost:7000/resetPassword", {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/resetPassword`, {
     method: "POST",
     body: JSON.stringify({
       userId,

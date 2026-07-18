@@ -11,7 +11,7 @@ export const useUserStore = defineStore("users", {
 
   actions: {
     async getUser() {
-      const response = await fetchWithRefresh("http://localhost:7000/getUser", {
+      const response = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/getUser`, {
         method: "GET",
         credentials: "include",
       });
@@ -25,7 +25,7 @@ export const useUserStore = defineStore("users", {
     },
 
     async getUsers() {
-      const response = await fetchWithRefresh("http://localhost:7000/getUsers", {
+      const response = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/getUsers`, {
         method: "GET",
         credentials: "include",
       });

@@ -65,7 +65,7 @@ watch(code, () => {
 
 // Function to get current user
 const getUser = async () => {
-  const response = await fetch("http://localhost:7000/getUser", {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/getUser`, {
     method: "POST",
     body: JSON.stringify({ userId: userId }),
     headers: { "Content-Type": "application/json" },
@@ -74,12 +74,14 @@ const getUser = async () => {
 
   const data = await response.json();
 
+  console.log(data);
+
   user.value = data.user;
 };
 
 // Function to handle with code verification
 const handleVerifyCode = async () => {
-  const response = await fetch("http://localhost:7000/verify", {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/verify`, {
     method: "POST",
     body: JSON.stringify({ code: code.value, userId }),
     headers: { "Content-Type": "application/json" },
@@ -88,10 +90,12 @@ const handleVerifyCode = async () => {
 
   const data = await response.json();
 
+  console.log(data);
+
   if (data.success) {
     router.push({ name: "homePage" });
   } else {
-    codeMessage.value = data.errors.code;
+    codeMessage.value = data.message;
   }
 };
 

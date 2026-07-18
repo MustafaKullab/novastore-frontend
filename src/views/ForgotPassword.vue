@@ -79,7 +79,7 @@ watch(email, () => {
 
 // Function to handle with code verification
 const handleForgotPassword = async () => {
-  const response = await fetch("http://localhost:7000/forgotPassword", {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/forgotPassword`, {
     method: "POST",
     body: JSON.stringify({ email: email.value }),
     headers: { "Content-Type": "application/json" },

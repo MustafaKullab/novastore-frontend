@@ -79,10 +79,10 @@
                 <div class="text">
                   <p class="m-0 mb-1 text-muted">Order Date</p>
                   <p class="m-0 fw-bold mb-1" v-if="productStore.currentOrder">
-                    {{ productStore.currentOrder.createdAt }}
+                    {{ formatDate(productStore.currentOrder.createdAt) }}
                   </p>
                   <p class="m-0 text-muted" v-if="productStore.currentOrder">
-                    {{ productStore.currentOrder.time }}
+                    {{ new Date(productStore.currentOrder.time).toLocaleTimeString("en-US") }}
                   </p>
                 </div>
               </div>
@@ -171,6 +171,7 @@
 </template>
 
 <script setup>
+import { formatDate } from "../../public/formatDate";
 import { onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { useProductsStore } from "@/stores/products";

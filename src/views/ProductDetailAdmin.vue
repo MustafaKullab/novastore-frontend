@@ -189,7 +189,7 @@
                       <div class="text">Created At</div>
                     </div>
                     <div class="value" style="font-size: 18px">
-                      {{ productsStore.product.createdAt }}
+                      {{ formatDate(productsStore.product.createdAt) }}
                     </div>
                   </li>
                 </ul>
@@ -237,6 +237,7 @@
 </template>
 
 <script setup>
+import { formatDate } from "../../public/formatDate";
 import SideBar from "@/components/SideBar.vue";
 import TopBar from "@/components/TopBar.vue";
 import { useRoute } from "vue-router";

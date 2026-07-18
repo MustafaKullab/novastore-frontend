@@ -46,7 +46,8 @@
                   <h5>{{ category.name }}</h5>
                 </div>
                 <div class="countOfCategory text-muted">
-                  {{ countCategory(category._id) }} Products
+                  {{ countCategory(category._id) }}
+                  <span>{{ countCategory(category._id) > 1 ? "Products" : "Product" }}</span>
                 </div>
                 <div class="description small text-muted">{{ category.description }}</div>
               </div>

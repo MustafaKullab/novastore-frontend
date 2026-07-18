@@ -62,8 +62,12 @@
                 </div>
                 <div class="details">
                   <div class="title text-muted mb-2">Order Date</div>
-                  <div class="date fw-bold">{{ productsStore.currentOrder.createdAt }}</div>
-                  <div class="time fw-bold">{{ productsStore.currentOrder.time }}</div>
+                  <div class="date fw-bold">
+                    {{ formatDate(productsStore.currentOrder.createdAt) }}
+                  </div>
+                  <div class="time fw-bold">
+                    {{ new Date(productsStore.currentOrder.time).toLocaleTimeString("en-US") }}
+                  </div>
                 </div>
               </div>
               <div class="col-lg-3 d-flex gap-3 mb-3 pb-3 mb-lg-0 pb-lg-0 border-bottom">
@@ -288,6 +292,7 @@
   </div>
 </template>
 <script setup>
+import { formatDate } from "../../public/formatDate";
 import SideBar from "@/components/SideBar.vue";
 import TopBar from "@/components/TopBar.vue";
 import { onMounted, ref } from "vue";
@@ -310,7 +315,7 @@ const statusSelected = ref("");
 
 // Function to update the status
 const updateStatus = async () => {
-  const response = await fetchWithRefresh("http://localhost:7000/updateStatucOfOrder", {
+  const response = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/updateStatucOfOrder`, {
     method: "PATCH",
     body: JSON.stringify({ orderId, statusSelected: statusSelected.value }),
     headers: { "Content-Type": "application/json" },

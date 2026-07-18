@@ -84,7 +84,7 @@ const router = useRouter();
 
 // Function to logout admin
 const logout = async () => {
-  const response = await fetchWithRefresh("http://localhost:7000/logout", {
+  const response = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/logout`, {
     method: "POST",
     credentials: "include",
   });

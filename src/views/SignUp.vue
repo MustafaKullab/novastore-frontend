@@ -253,7 +253,7 @@ const handleSignUp = async () => {
   formData.append("password", password.value);
   formData.append("confPass", confPass.value);
 
-  const response = await fetch("http://localhost:7000/signup", {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/signup`, {
     method: "POST",
     body: formData,
     credentials: "include",

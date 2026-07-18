@@ -118,7 +118,7 @@ watch(password, () => {
 
 // Function to handle with code verification
 const handleLogin = async () => {
-  const response = await fetch("http://localhost:7000/login", {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/login`, {
     method: "POST",
     body: JSON.stringify({ email: email.value, password: password.value }),
     headers: { "Content-Type": "application/json" },

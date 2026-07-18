@@ -372,7 +372,7 @@ watch(message, () => {
 });
 
 const handleWithSendMessage = async () => {
-  const response = await fetchWithRefresh("http://localhost:7000/contactMessage", {
+  const response = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/contactMessage`, {
     method: "POST",
     body: JSON.stringify({
       fullName: fullName.value,

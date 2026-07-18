@@ -329,7 +329,7 @@ const handleWithClickOutsideMenu = (e) => {
 
 // Function to delete the item from cart
 const deleteItem = async (item) => {
-  const response = await fetchWithRefresh("http://localhost:7000/rmvFromCart", {
+  const response = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/rmvFromCart`, {
     method: "POST",
     body: JSON.stringify({ productId: item.productId._id, quantity: item.quantity }),
     headers: { "Content-Type": "application/json" },
@@ -347,7 +347,7 @@ const deleteItem = async (item) => {
 
 // Function to logout admin
 const logout = async () => {
-  const response = await fetchWithRefresh("http://localhost:7000/logout", {
+  const response = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/logout`, {
     method: "POST",
     credentials: "include",
   });

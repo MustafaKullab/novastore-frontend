@@ -15,7 +15,6 @@ export const useProductsStore = defineStore("products", {
     lowStockProducts: [],
     orders: [],
     lengthOutOfStockProducts: 0,
-    categoriesLength: 0,
     allOrders: [],
     product: null,
     messages: [],
@@ -26,7 +25,7 @@ export const useProductsStore = defineStore("products", {
     async getProducts() {
       try {
         this.loading = true;
-        const response = await fetchWithRefresh("http://localhost:7000/products", {
+        const response = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/products`, {
           method: "GET",
           credentials: "include",
         });
@@ -44,10 +43,13 @@ export const useProductsStore = defineStore("products", {
     async getProduct(productId) {
       try {
         this.loading = true;
-        const response = await fetchWithRefresh(`http://localhost:7000/getProduct/${productId}`, {
-          method: "GET",
-          credentials: "include",
-        });
+        const response = await fetchWithRefresh(
+          `${import.meta.env.VITE_API_URL}/getProduct/${productId}`,
+          {
+            method: "GET",
+            credentials: "include",
+          },
+        );
 
         const data = await response.json();
 
@@ -63,7 +65,7 @@ export const useProductsStore = defineStore("products", {
 
     async getCart() {
       try {
-        const response = await fetchWithRefresh("http://localhost:7000/cart", {
+        const response = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/cart`, {
           method: "GET",
           credentials: "include",
         });
@@ -82,7 +84,7 @@ export const useProductsStore = defineStore("products", {
     },
     async getProductDetail(productId) {
       try {
-        const response = await fetchWithRefresh("http://localhost:7000/productDetail", {
+        const response = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/productDetail`, {
           method: "POST",
           body: JSON.stringify({ productId }),
           headers: { "Content-Type": "application/json" },
@@ -91,13 +93,15 @@ export const useProductsStore = defineStore("products", {
 
         const data = await response.json();
 
+        console.log(data);
+
         this.productDetail = data.product;
       } catch (error) {
         console.log(error);
       }
     },
     async getCurrentOrder(orderId) {
-      const response = await fetchWithRefresh("http://localhost:7000/getOrder", {
+      const response = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/getOrder`, {
         method: "POST",
         body: JSON.stringify({ orderId: orderId }),
         headers: { "Content-Type": "application/json" },
@@ -112,7 +116,7 @@ export const useProductsStore = defineStore("products", {
     },
 
     async getAllOrders() {
-      const response = await fetchWithRefresh("http://localhost:7000/allOrders", {
+      const response = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/allOrders`, {
         method: "GET",
         credentials: "include",
       });
@@ -123,7 +127,7 @@ export const useProductsStore = defineStore("products", {
     },
 
     async getTotalProducts() {
-      const response = await fetchWithRefresh("http://localhost:7000/totalProducts", {
+      const response = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/totalProducts`, {
         method: "GET",
         credentials: "include",
       });
@@ -136,7 +140,7 @@ export const useProductsStore = defineStore("products", {
     },
 
     async getTotalOrders() {
-      const response = await fetchWithRefresh("http://localhost:7000/totalOrders", {
+      const response = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/totalOrders`, {
         method: "GET",
         credentials: "include",
       });
@@ -149,7 +153,7 @@ export const useProductsStore = defineStore("products", {
     },
 
     async getTotalUsers() {
-      const response = await fetchWithRefresh("http://localhost:7000/totalUsers", {
+      const response = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/totalUsers`, {
         method: "GET",
         credentials: "include",
       });
@@ -162,7 +166,7 @@ export const useProductsStore = defineStore("products", {
     },
 
     async getRevenue() {
-      const response = await fetchWithRefresh("http://localhost:7000/revenue", {
+      const response = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/revenue`, {
         method: "GET",
         credentials: "include",
       });
@@ -175,7 +179,7 @@ export const useProductsStore = defineStore("products", {
     },
 
     async getLatestOrders() {
-      const response = await fetchWithRefresh("http://localhost:7000/latestOrders", {
+      const response = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/latestOrders`, {
         method: "GET",
         credentials: "include",
       });
@@ -188,7 +192,7 @@ export const useProductsStore = defineStore("products", {
     },
 
     async getRecentMessages() {
-      const response = await fetchWithRefresh("http://localhost:7000/recentMessages", {
+      const response = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/recentMessages`, {
         method: "GET",
         credentials: "include",
       });
@@ -201,7 +205,7 @@ export const useProductsStore = defineStore("products", {
     },
 
     async getLowStockProducts() {
-      const response = await fetchWithRefresh("http://localhost:7000/lowStockProducts", {
+      const response = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/lowStockProducts`, {
         method: "GET",
         credentials: "include",
       });
@@ -214,10 +218,13 @@ export const useProductsStore = defineStore("products", {
     },
 
     async getOutOfStockLength() {
-      const response = await fetchWithRefresh("http://localhost:7000/outOfStockProducts", {
-        method: "GET",
-        credentials: "include",
-      });
+      const response = await fetchWithRefresh(
+        `${import.meta.env.VITE_API_URL}/outOfStockProducts`,
+        {
+          method: "GET",
+          credentials: "include",
+        },
+      );
 
       const data = await response.json();
 
@@ -226,21 +233,8 @@ export const useProductsStore = defineStore("products", {
       }
     },
 
-    async getCategoriesLength() {
-      const response = await fetchWithRefresh("http://localhost:7000/lenghCategories", {
-        method: "GET",
-        credentials: "include",
-      });
-
-      const data = await response.json();
-
-      if (data.success) {
-        this.categoriesLength = data.categoriesLength;
-      }
-    },
-
     async getAllOrdersOfUsers() {
-      const response = await fetchWithRefresh("http://localhost:7000/orders", {
+      const response = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/orders`, {
         method: "GET",
         credentials: "include",
       });
@@ -251,7 +245,7 @@ export const useProductsStore = defineStore("products", {
     },
 
     async getMessages() {
-      const response = await fetchWithRefresh("http://localhost:7000/getMessages", {
+      const response = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/getMessages`, {
         method: "GET",
         credentials: "include",
       });
@@ -265,7 +259,7 @@ export const useProductsStore = defineStore("products", {
 
     async getSpecificMessage(messageId) {
       const response = await fetchWithRefresh(
-        `http://localhost:7000/specificMessage/${messageId}`,
+        `${import.meta.env.VITE_API_URL}/specificMessage/${messageId}`,
         {
           method: "GET",
           credentials: "include",

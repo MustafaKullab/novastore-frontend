@@ -140,7 +140,7 @@
                   </td>
                   <td>
                     <div class="rounded mt-3 mx-auto">
-                      {{ message.createdAt }}
+                      {{ formatDate(message.createdAt) }}
                     </div>
                   </td>
                   <td>
@@ -177,6 +177,7 @@
 </template>
 
 <script setup>
+import { formatDate } from "../../public/formatDate";
 import SideBar from "@/components/SideBar.vue";
 import TopBar from "@/components/TopBar.vue";
 import { useProductsStore } from "@/stores/products";
@@ -212,7 +213,7 @@ const filteringMessages = computed(() => {
 
 // Function to mark all as read
 const markAllUsRead = async () => {
-  const response = await fetchWithRefresh("http://localhost:7000/markAsRead", {
+  const response = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/markAsRead`, {
     method: "PUT",
     credentials: "include",
   });
@@ -226,7 +227,7 @@ const markAllUsRead = async () => {
 
 // Function to read the message
 const readMsg = async (messageId) => {
-  const response = await fetchWithRefresh("http://localhost:7000/readMessage", {
+  const response = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/readMessage`, {
     method: "PATCH",
     body: JSON.stringify({ messageId }),
     headers: { "Content-Type": "application/json" },

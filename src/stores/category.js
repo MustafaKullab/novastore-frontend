@@ -4,6 +4,7 @@ export const useCategoryStore = defineStore("category", {
   state: () => ({
     categories: [],
     selectedCategory: "All",
+    categoriesLength: 0,
   }),
   getters: {},
 
@@ -42,6 +43,19 @@ export const useCategoryStore = defineStore("category", {
 
     setCategory(category) {
       this.selectedCategory = category;
+    },
+
+    async getCategoriesLength() {
+      const response = await fetchWithRefresh("http://localhost:7000/lenghCategories", {
+        method: "GET",
+        credentials: "include",
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        this.categoriesLength = data.categoriesLength;
+      }
     },
   },
 });
