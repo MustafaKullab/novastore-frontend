@@ -171,7 +171,7 @@
 </template>
 
 <script setup>
-import { formatDate } from "../../public/formatDate";
+import { formatDate } from "../utils/formatDate";
 import { onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { useProductsStore } from "@/stores/products";

@@ -186,7 +186,7 @@
 </template>
 
 <script setup>
-import { formatDate } from "../../public/formatDate";
+import { formatDate } from "../utils/formatDate";
 import SideBar from "@/components/SideBar.vue";
 import TopBar from "@/components/TopBar.vue";
 import { useUserStore } from "@/stores/user";
