@@ -88,7 +88,7 @@ npm run format        # Format source files with oxfmt
 Want to try the storefront without creating an account? Use this demo account:
 
 ```
-Email:    test@novastore.com
+Email: test@novastore.com
 Password: admin123
 ```
 
