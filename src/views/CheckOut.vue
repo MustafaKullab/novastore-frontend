@@ -189,7 +189,7 @@
               >
                 <div class="image">
                   <img
-                    :src="`${import.meta.env.VITE_API_URL}/${item.image}`"
+                    :src="`${apiUrl}/${item.image}`"
                     class="img-fluid"
                     style="width: 80px"
                     :alt="item.productId.name"
@@ -500,6 +500,8 @@ const placeOrder = async () => {
     return;
   }
 };
+
+const apiUrl = import.meta.env.VITE_API_URL;
 
 onMounted(async () => {
   await productStore.getCart();

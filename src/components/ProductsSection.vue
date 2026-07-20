@@ -22,7 +22,7 @@
               @click="router.push({ name: 'productDetail', params: { product_id: product._id } })"
             >
               <img
-                :src="`${import.meta.env.VITE_API_URL}/${product.image}`"
+                :src="`${apiUrl}/${product.image}`"
                 class="img-fluid"
                 style="width: 160px"
                 :alt="product.name"
@@ -276,6 +276,8 @@ const goToSignPage = () => {
   closeModal.value.click();
   router.push({ name: "signup" });
 };
+
+const apiUrl = import.meta.env.VITE_API_URL;
 
 onMounted(async () => {
   await productStore.getProducts();

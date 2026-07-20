@@ -208,7 +208,7 @@
                 </div>
                 <div class="image mt-3 p-5 rounded" style="background-color: #f6f4fd">
                   <img
-                    :src="`${import.meta.env.VITE_API_URL}/${productsStore.product.image}`"
+                    :src="`${apiUrl}/${productsStore.product.image}`"
                     class="rounded"
                     style="width: 100%; height: 287px; object-fit: contain"
                     :alt="productsStore.product.name"
@@ -252,6 +252,8 @@ const route = useRoute();
 
 // define the productId
 const productId = route.params.productId;
+
+const apiUrl = import.meta.env.VITE_API_URL;
 
 onMounted(async () => {
   await productsStore.getProduct(productId);

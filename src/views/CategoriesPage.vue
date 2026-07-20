@@ -34,7 +34,7 @@
           >
             <div class="imageSide p-2">
               <img
-                :src="`${import.meta.env.VITE_API_URL}/${category.image}`"
+                :src="`${apiUrl}/${category.image}`"
                 :alt="category.name"
                 class="img-fluid"
                 style="width: 150px"
@@ -104,6 +104,8 @@ const goToCategory = (categoryId) => {
 
   router.push({ name: "products" });
 };
+
+const apiUrl = import.meta.env.VITE_API_URL;
 
 onMounted(async () => {
   await productStore.getProducts();

@@ -123,7 +123,7 @@
                     <div class="mt-1 d-flex align-items-center gap-3">
                       <div class="image" style="flex-shrink: 0">
                         <img
-                          :src="`${import.meta.env.VITE_API_URL}/${message.userId.avatar}`"
+                          :src="`${apiUrl}/${message.userId.avatar}`"
                           :alt="message.userId.username"
                           style="width: 50px; height: 50px; object-fit: cover"
                           class="img-fluid rounded-pill"
@@ -234,6 +234,8 @@ const readMsg = async (messageId) => {
     credentials: "include",
   });
 };
+
+const apiUrl = import.meta.env.VITE_API_URL;
 
 onMounted(async () => {
   await productsStore.getMessages();

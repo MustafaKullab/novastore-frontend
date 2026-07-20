@@ -43,7 +43,7 @@
         <div>Visit Store</div>
       </router-link>
       <img
-        :src="`${import.meta.env.VITE_API_URL}/${userStore?.user?.avatar}`"
+        :src="`${apiUrl}/${userStore?.user?.avatar}`"
         class="rounded-pill border"
         style="width: 40px; height: 40px; object-fit: cover"
         alt="Logo"
@@ -62,6 +62,8 @@ import { onMounted } from "vue";
 const userStore = useUserStore();
 
 const route = useRoute();
+
+const apiUrl = import.meta.env.VITE_API_URL;
 
 onMounted(async () => {
   await userStore.getUser();

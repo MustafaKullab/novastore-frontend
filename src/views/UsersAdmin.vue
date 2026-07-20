@@ -126,7 +126,7 @@
                       <div class="mt-1 d-flex align-items-center gap-2">
                         <div class="image" style="flex-shrink: 0">
                           <img
-                            :src="`${import.meta.env.VITE_API_URL}/${user.avatar}`"
+                            :src="`${apiUrl}/${user.avatar}`"
                             style="width: 50px; height: 50px; object-fit: cover"
                             :alt="user.username"
                             class="img-fluid rounded-pill"
@@ -223,6 +223,8 @@ const deleteUser = async (id) => {
     await userStore.getUsers();
   }
 };
+
+const apiUrl = import.meta.env.VITE_API_URL;
 
 onMounted(async () => {
   await userStore.getUsers();

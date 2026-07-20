@@ -149,7 +149,7 @@
                       <div class="mt-1 d-flex align-items-center gap-3">
                         <div class="image" style="flex-shrink: 0">
                           <img
-                            :src="`${import.meta.env.VITE_API_URL}/${order.userId?.avatar}`"
+                            :src="`${apiUrl}/${order.userId?.avatar}`"
                             class="img-fluid rounded-pill border"
                             style="width: 40px; height: 40px; object-fit: cover"
                             :alt="order.userId?.username"
@@ -517,6 +517,8 @@ const totalOrders = computed(() => {
 const calculateOrders = (status) => {
   return productsStore.allOrders.filter((order) => order.status === status).length;
 };
+
+const apiUrl = import.meta.env.VITE_API_URL;
 
 onMounted(async () => {
   await productsStore.getAllOrdersOfUsers();

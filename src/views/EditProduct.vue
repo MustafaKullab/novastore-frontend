@@ -184,7 +184,7 @@
                 >
                   <div class="image position-relative">
                     <img
-                      :src="`${import.meta.env.VITE_API_URL}/${productsStore.product.image}`"
+                      :src="`${apiUrl}/${productsStore.product.image}`"
                       :alt="productsStore.product.name"
                       class="img-fluid rounded"
                       style="width: 100%; height: 250px; object-fit: contain"
@@ -355,6 +355,8 @@ const deleteImgFromProduct = async () => {
     await productsStore.getProduct(data.product._id);
   }
 };
+
+const apiUrl = import.meta.env.VITE_API_URL;
 
 onMounted(async () => {
   await categoryStore.getCategories();

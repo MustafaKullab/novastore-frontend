@@ -229,7 +229,7 @@
                     "
                   >
                     <img
-                      :src="`${import.meta.env.VITE_API_URL}/${product.image}`"
+                      :src="`${apiUrl}/${product.image}`"
                       class="img-fluid"
                       style="width: 150px; height: 150px; cursor: pointer; object-fit: contain"
                       alt="Books"
@@ -537,6 +537,8 @@ const goToSignPage = () => {
   closeModal.value.click();
   router.push({ name: "signup" });
 };
+
+const apiUrl = import.meta.env.VITE_API_URL;
 
 onMounted(async () => {
   await productStore.getProducts();

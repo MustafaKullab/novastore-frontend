@@ -187,7 +187,7 @@
                       <div class="productDetails d-flex align-items-center gap-2">
                         <div class="image p-2 rounded border" style="background-color: #f9f8f9">
                           <img
-                            :src="`${import.meta.env.VITE_API_URL}/${product.image}`"
+                            :src="`${apiUrl}/${product.image}`"
                             :alt="product.name"
                             style="width: 70px; height: 70px; object-fit: contain"
                           />
@@ -320,6 +320,8 @@ const deleteProduct = async (id) => {
     await productsStore.getProducts();
   }
 };
+
+const apiUrl = import.meta.env.VITE_API_URL;
 
 onMounted(async () => {
   await productsStore.getProducts();

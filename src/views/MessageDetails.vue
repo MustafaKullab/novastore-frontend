@@ -44,7 +44,7 @@
               <div class="col-md-4">
                 <div class="userAvatar my-3 my-md-0">
                   <img
-                    :src="`${import.meta.env.VITE_API_URL}/${productsStore.specificMessage.userId?.avatar}`"
+                    :src="`${apiUrl}/${productsStore.specificMessage.userId?.avatar}`"
                     :alt="productsStore.specificMessage.userId?.username"
                     style="width: 100px; height: 100px; object-fit: cover"
                     class="img-fluid rounded-pill"
@@ -275,6 +275,8 @@ const sendEmail = async () => {
     toast.success("The response was sent successfully");
   }
 };
+
+const apiUrl = import.meta.env.VITE_API_URL;
 
 onMounted(async () => {
   await productsStore.getSpecificMessage(messageId);

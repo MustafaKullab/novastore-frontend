@@ -124,7 +124,7 @@
                   >
                     <div class="image p-2 bg-light rounded my-2" style="width: fit-content">
                       <img
-                        :src="`${import.meta.env.VITE_API_URL}/${item.productId.image}`"
+                        :src="`${apiUrl}/${item.productId.image}`"
                         class="img-fluid"
                         style="width: 80px; height: 80px"
                         alt=""
@@ -202,7 +202,7 @@
                 style="border: none !important"
               >
                 <img
-                  :src="`${import.meta.env.VITE_API_URL}/${userStore.user.avatar}`"
+                  :src="`${apiUrl}/${userStore.user.avatar}`"
                   class="img-fluid rounded-pill border"
                   style="width: 30px; height: 30px; object-fit: cover"
                   alt=""
@@ -212,7 +212,7 @@
                 <div class="details p-2 d-flex align-items-center gap-2 border-bottom">
                   <div class="image" style="flex-shrink: 0">
                     <img
-                      :src="`${import.meta.env.VITE_API_URL}/${userStore.user.avatar}`"
+                      :src="`${apiUrl}/${userStore.user.avatar}`"
                       class="img-fluid rounded-pill"
                       style="width: 40px; height: 40px; object-fit: cover"
                       :alt="userStore.user.username"
@@ -363,6 +363,8 @@ const logout = async () => {
 const closeCart = () => {
   showMenu.value = false;
 };
+
+const apiUrl = import.meta.env.VITE_API_URL;
 
 onMounted(async () => {
   document.addEventListener("click", handleWithClickOutsideMenu);

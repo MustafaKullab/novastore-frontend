@@ -191,7 +191,7 @@
                   <div class="d-flex align-items-center gap-3">
                     <div class="image">
                       <img
-                        :src="`${import.meta.env.VITE_API_URL}/${item.productId?.image}`"
+                        :src="`${apiUrl}/${item.productId?.image}`"
                         style="width: 80px; object-fit: contain"
                         :alt="item.productId?.name"
                       />
@@ -255,6 +255,8 @@ const orderTotal = computed(() => {
     0,
   );
 });
+
+const apiUrl = import.meta.env.VITE_API_URL;
 
 onMounted(async () => {
   await productsStore.getCurrentOrder(orderId);

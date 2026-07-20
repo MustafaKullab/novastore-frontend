@@ -29,7 +29,7 @@
           >
             <div class="image">
               <img
-                :src="`${import.meta.env.VITE_API_URL}/${category.image}`"
+                :src="`${apiUrl}/${category.image}`"
                 class="img-fluid mb-2"
                 style="width: 57px"
                 alt="Electronics"
@@ -53,6 +53,8 @@ const categoryStore = useCategoryStore();
 const clearFilter = () => {
   categoryStore.selectedCategory = "All";
 };
+
+const apiUrl = import.meta.env.VITE_API_URL;
 
 onMounted(async () => {
   await categoryStore.getCategories();

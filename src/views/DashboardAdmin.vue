@@ -140,7 +140,7 @@
                           <div class="image">
                             <img
                               class="rounded-pill"
-                              :src="`${import.meta.env.VITE_API_URL}/${order.userId.avatar}`"
+                              :src="`${apiUrl}/${order.userId.avatar}`"
                               style="width: 34px; height: 34px; object-fit: cover"
                               :alt="order.userId.username"
                             />
@@ -212,7 +212,7 @@
                 >
                   <div class="avatar">
                     <img
-                      :src="`http://localhost:7000/${message?.userId?.avatar}`"
+                      :src="`${apiUrl}/${message?.userId?.avatar}`"
                       class="rounded-pill"
                       style="width: 54px; height: 54px; object-fit: cover"
                       alt="avatar"
@@ -267,11 +267,7 @@
                   class="image p-2 rounded border"
                   style="background-color: #f8f8f8; width: fit-content"
                 >
-                  <img
-                    :src="`http://localhost:7000/${product.image}`"
-                    style="width: 70px"
-                    alt="product"
-                  />
+                  <img :src="`${apiUrl}/${product.image}`" style="width: 70px" alt="product" />
                 </div>
                 <div class="details">
                   <div class="productName fw-bold mb-1">{{ product.name }}</div>
@@ -303,6 +299,8 @@ import { useRouter } from "vue-router";
 const productsStore = useProductsStore();
 
 const router = useRouter();
+
+const apiUrl = import.meta.env.VITE_API_URL;
 
 onMounted(async () => {
   await productsStore.getTotalProducts();

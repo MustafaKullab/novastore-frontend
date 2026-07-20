@@ -36,7 +36,7 @@
             style="background-color: #f5f5fc"
           >
             <img
-              :src="`${import.meta.env.VITE_API_URL}/${productStore.productDetail.image}`"
+              :src="`${apiUrl}/${productStore.productDetail.image}`"
               :alt="productStore.productDetail.name"
               class="img-fluid"
               style="max-width: 100%; object-fit: contain"
@@ -171,7 +171,7 @@
               >
                 <div class="image">
                   <img
-                    :src="`${import.meta.env.VITE_API_URL}/${product.image}`"
+                    :src="`${apiUrl}/${product.image}`"
                     :alt="product.name"
                     class="img-fluid"
                     style="width: 160px; object-fit: contain"
@@ -380,6 +380,8 @@ const goToSignPage = () => {
   closeModal.value.click();
   router.push({ name: "signup" });
 };
+
+const apiUrl = import.meta.env.VITE_API_URL;
 
 onMounted(async () => {
   await productStore.getProductDetail(productId);

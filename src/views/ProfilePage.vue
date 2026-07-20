@@ -67,7 +67,7 @@
                 </div>
                 <div class="image mb-3">
                   <img
-                    :src="`${import.meta.env.VITE_API_URL}/${userStore.user.avatar}`"
+                    :src="`${apiUrl}/${userStore.user.avatar}`"
                     style="width: 80px; height: 80px; object-fit: cover"
                     class="rounded-pill"
                     alt="test"
@@ -465,6 +465,8 @@ const logout = async () => {
     router.push({ name: "login" });
   }
 };
+
+const apiUrl = import.meta.env.VITE_API_URL;
 
 onMounted(async () => {
   await userStore.getUser();
