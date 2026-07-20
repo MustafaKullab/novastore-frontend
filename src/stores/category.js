@@ -11,7 +11,7 @@ export const useCategoryStore = defineStore("category", {
   actions: {
     async getCategories() {
       try {
-        const response = await fetchWithRefresh("http://localhost:7000/allCategories", {
+        const response = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/allCategories`, {
           method: "GET",
           credentials: "include",
         });
@@ -27,10 +27,13 @@ export const useCategoryStore = defineStore("category", {
     },
 
     async deleteCategory(id) {
-      const response = await fetchWithRefresh(`http://localhost:7000/deleteCategory/${id}`, {
-        method: "DELETE",
-        credentials: "include",
-      });
+      const response = await fetchWithRefresh(
+        `${import.meta.env.VITE_API_URL}/deleteCategory/${id}`,
+        {
+          method: "DELETE",
+          credentials: "include",
+        },
+      );
 
       const data = await response.json();
 
@@ -46,7 +49,7 @@ export const useCategoryStore = defineStore("category", {
     },
 
     async getCategoriesLength() {
-      const response = await fetchWithRefresh("http://localhost:7000/lenghCategories", {
+      const response = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/lenghCategories`, {
         method: "GET",
         credentials: "include",
       });
