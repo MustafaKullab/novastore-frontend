@@ -126,7 +126,7 @@
                       <div class="mt-1 d-flex align-items-center gap-2">
                         <div class="image" style="flex-shrink: 0">
                           <img
-                            :src="`http://localhost:7000/${user.avatar}`"
+                            :src="`${import.meta.env.VITE_API_URL}/${user.avatar}`"
                             style="width: 50px; height: 50px; object-fit: cover"
                             :alt="user.username"
                             class="img-fluid rounded-pill"

@@ -187,7 +187,7 @@
                       <div class="productDetails d-flex align-items-center gap-2">
                         <div class="image p-2 rounded border" style="background-color: #f9f8f9">
                           <img
-                            :src="`http://localhost:7000/${product.image}`"
+                            :src="`${import.meta.env.VITE_API_URL}/${product.image}`"
                             :alt="product.name"
                             style="width: 70px; height: 70px; object-fit: contain"
                           />

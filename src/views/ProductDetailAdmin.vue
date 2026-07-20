@@ -208,7 +208,7 @@
                 </div>
                 <div class="image mt-3 p-5 rounded" style="background-color: #f6f4fd">
                   <img
-                    :src="`http://localhost:7000/${productsStore.product.image}`"
+                    :src="`${import.meta.env.VITE_API_URL}/${productsStore.product.image}`"
                     class="rounded"
                     style="width: 100%; height: 287px; object-fit: contain"
                     :alt="productsStore.product.name"

@@ -22,7 +22,7 @@
               @click="router.push({ name: 'productDetail', params: { product_id: product._id } })"
             >
               <img
-                :src="`http://localhost:7000/${product.image}`"
+                :src="`${import.meta.env.VITE_API_URL}/${product.image}`"
                 class="img-fluid"
                 style="width: 160px"
                 :alt="product.name"

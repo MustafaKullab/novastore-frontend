@@ -36,7 +36,7 @@
             style="background-color: #f5f5fc"
           >
             <img
-              :src="`http://localhost:7000/${productStore.productDetail.image}`"
+              :src="`${import.meta.env.VITE_API_URL}/${productStore.productDetail.image}`"
               :alt="productStore.productDetail.name"
               class="img-fluid"
               style="max-width: 100%; object-fit: contain"
@@ -171,7 +171,7 @@
               >
                 <div class="image">
                   <img
-                    :src="`http://localhost:7000/${product.image}`"
+                    :src="`${import.meta.env.VITE_API_URL}/${product.image}`"
                     :alt="product.name"
                     class="img-fluid"
                     style="width: 160px; object-fit: contain"

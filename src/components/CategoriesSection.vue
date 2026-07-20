@@ -29,7 +29,7 @@
           >
             <div class="image">
               <img
-                :src="`http://localhost:7000/${category.image}`"
+                :src="`${import.meta.env.VITE_API_URL}/${category.image}`"
                 class="img-fluid mb-2"
                 style="width: 57px"
                 alt="Electronics"

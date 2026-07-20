@@ -67,7 +67,7 @@
                 </div>
                 <div class="image mb-3">
                   <img
-                    :src="`http://localhost:7000/${userStore.user.avatar}`"
+                    :src="`${import.meta.env.VITE_API_URL}/${userStore.user.avatar}`"
                     style="width: 80px; height: 80px; object-fit: cover"
                     class="rounded-pill"
                     alt="test"

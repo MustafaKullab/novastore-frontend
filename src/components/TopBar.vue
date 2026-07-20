@@ -43,7 +43,7 @@
         <div>Visit Store</div>
       </router-link>
       <img
-        :src="`http://localhost:7000/${userStore?.user?.avatar}`"
+        :src="`${import.meta.env.VITE_API_URL}/${userStore?.user?.avatar}`"
         class="rounded-pill border"
         style="width: 40px; height: 40px; object-fit: cover"
         alt="Logo"

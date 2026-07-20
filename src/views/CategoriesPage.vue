@@ -34,7 +34,7 @@
           >
             <div class="imageSide p-2">
               <img
-                :src="`http://localhost:7000/${category.image}`"
+                :src="`${import.meta.env.VITE_API_URL}/${category.image}`"
                 :alt="category.name"
                 class="img-fluid"
                 style="width: 150px"

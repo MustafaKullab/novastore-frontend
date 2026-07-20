@@ -189,7 +189,7 @@
               >
                 <div class="image">
                   <img
-                    src="@/assets/images/books.png"
+                    :src="`${import.meta.env.VITE_API_URL}/${item.image}`"
                     class="img-fluid"
                     style="width: 80px"
                     :alt="item.productId.name"

@@ -44,7 +44,7 @@
               <div class="col-md-4">
                 <div class="userAvatar my-3 my-md-0">
                   <img
-                    :src="`http://localhost:7000/${productsStore.specificMessage.userId?.avatar}`"
+                    :src="`${import.meta.env.VITE_API_URL}/${productsStore.specificMessage.userId?.avatar}`"
                     :alt="productsStore.specificMessage.userId?.username"
                     style="width: 100px; height: 100px; object-fit: cover"
                     class="img-fluid rounded-pill"

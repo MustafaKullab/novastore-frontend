@@ -184,7 +184,7 @@
                 >
                   <div class="image position-relative">
                     <img
-                      :src="`http://localhost:7000/${productsStore.product.image}`"
+                      :src="`${import.meta.env.VITE_API_URL}/${productsStore.product.image}`"
                       :alt="productsStore.product.name"
                       class="img-fluid rounded"
                       style="width: 100%; height: 250px; object-fit: contain"

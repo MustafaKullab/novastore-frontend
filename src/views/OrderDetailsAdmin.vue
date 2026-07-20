@@ -199,7 +199,7 @@
             <div class="customer d-flex align-items-center gap-5 my-4 flex-column flex-md-row">
               <div class="custImg">
                 <img
-                  :src="`http://localhost:7000/${productsStore.currentOrder.userId.avatar}`"
+                  :src="`${import.meta.env.VITE_API_URL}/${productsStore.currentOrder.userId.avatar}`"
                   :alt="productsStore.currentOrder.userId.username"
                   style="width: 120px; height: 120px; object-fit: cover"
                   class="rounded-pill"
@@ -259,7 +259,7 @@
                         <div class="productDetails d-flex align-items-center gap-2">
                           <div class="image p-2 rounded border" style="background-color: #f9f8f9">
                             <img
-                              :src="`http://localhost:7000/${product.productId?.image}`"
+                              :src="`${import.meta.env.VITE_API_URL}/${product.productId?.image}`"
                               :alt="product.productId?.name"
                               style="width: 70px; height: 70px; object-fit: contain"
                             />

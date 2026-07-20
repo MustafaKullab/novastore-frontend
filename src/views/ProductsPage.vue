@@ -229,7 +229,7 @@
                     "
                   >
                     <img
-                      :src="`http://localhost:7000/${product.image}`"
+                      :src="`${import.meta.env.VITE_API_URL}/${product.image}`"
                       class="img-fluid"
                       style="width: 150px; height: 150px; cursor: pointer; object-fit: contain"
                       alt="Books"

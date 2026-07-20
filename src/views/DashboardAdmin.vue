@@ -140,7 +140,7 @@
                           <div class="image">
                             <img
                               class="rounded-pill"
-                              :src="`http://localhost:7000/${order.userId.avatar}`"
+                              :src="`${import.meta.env.VITE_API_URL}/${order.userId.avatar}`"
                               style="width: 34px; height: 34px; object-fit: cover"
                               :alt="order.userId.username"
                             />

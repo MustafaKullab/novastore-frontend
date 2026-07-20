@@ -191,7 +191,7 @@
                   <div class="d-flex align-items-center gap-3">
                     <div class="image">
                       <img
-                        :src="`http://localhost:7000/${item.productId?.image}`"
+                        :src="`${import.meta.env.VITE_API_URL}/${item.productId?.image}`"
                         style="width: 80px; object-fit: contain"
                         :alt="item.productId?.name"
                       />
