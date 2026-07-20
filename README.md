@@ -89,7 +89,7 @@ Want to try the storefront without creating an account? Use this demo account:
 
 ```
 Email: test@novastore.com
-Password: admin123
+Password: test123
 ```
 
 > This is a **regular customer account** (browsing, cart, checkout, order history) — it does **not** have admin access. Admin credentials are not published publicly; reach out directly if you need to review the admin dashboard.
