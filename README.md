@@ -3,7 +3,7 @@
 Customer-facing storefront and admin dashboard for **NovaStore**, a full-stack e-commerce platform. Built with Vue 3, Vite, and Pinia, consuming the [NovaStore backend API](https://github.com/MustafaKullab/novastore-backend).
 
 > 🚀 **Live Demo:** [Deploy on Vercel](https://novastore-frontend-5rvfxtzyd-mustafa-kullabs-projects.vercel.app/)  
-> 🔗 Backend repository: [novastore-backend](https://github.com/MustafaKullab/novastore-backend)
+> 🔗 Backend repository: [novastore-backend](https://novastore-frontend-psi.vercel.app/)
 
 ---
 
