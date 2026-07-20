@@ -6,9 +6,6 @@ Customer-facing storefront and admin dashboard for **NovaStore**, a full-stack e
 > 🔗 Backend repository: [novastore-backend](https://github.com/MustafaKullab/novastore-backend)
 
 ---
-> 🔗 Backend repository: [novastore-backend](https://github.com/MustafaKullab/novastore-backend)
-
----
 
 ## Features
 
