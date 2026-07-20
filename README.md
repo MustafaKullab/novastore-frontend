@@ -83,6 +83,17 @@ npm run lint        # Lint and auto-fix (oxlint + eslint)
 npm run format        # Format source files with oxfmt
 ```
 
+## Demo Account
+
+Want to try the storefront without creating an account? Use this demo account:
+
+```
+Email:    test@novastore.com
+Password: admin123
+```
+
+> This is a **regular customer account** (browsing, cart, checkout, order history) — it does **not** have admin access. Admin credentials are not published publicly; reach out directly if you need to review the admin dashboard.
+
 ## Configuration
 
 The app expects the backend API to be reachable at `http://localhost:7000`. If your backend runs on a different port, update the base URL used in the API calls (`src/stores/*.js` and the `fetchWithRefresh` helper) accordingly.
