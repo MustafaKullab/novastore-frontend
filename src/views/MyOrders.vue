@@ -23,7 +23,31 @@
         <h1 class="title">My Orders</h1>
         <p class="text-muted">View and track all the orders you have places.</p>
       </div>
-      <div class="displayOrders p-4 bg-white border rounded my-4">
+      <div
+        class="displayOrders p-4 bg-white border rounded my-4 position-relative"
+        style="height: 400px"
+      >
+        <div
+          v-if="ordersFiltering.length === 0"
+          class="position-absolute text-center"
+          style="top: 50%; left: 50%; transform: translate(-50%, -50%)"
+        >
+          <div class="icon">
+            <i class="bi bi-bag-x text-warning" style="font-size: 70px"></i>
+          </div>
+          <div class="title"><h3 style="color: #1f2937">No Orders Yet!</h3></div>
+          <div class="subtext">
+            <p class="text-muted">
+              Looks like you haven't discovered our amazing products yet. Your cart is waiting to be
+              filled with the best deals!
+            </p>
+          </div>
+          <div class="button">
+            <router-link :to="{ name: 'products' }" class="btn btn-primary"
+              >Start Shopping</router-link
+            >
+          </div>
+        </div>
         <div class="filter d-flex align-items-center gap-3 flex-column flex-md-row">
           <div
             class="state all"

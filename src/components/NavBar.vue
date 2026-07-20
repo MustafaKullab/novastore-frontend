@@ -209,16 +209,16 @@
                 />
               </div>
               <div class="dropdown-menu">
-                <div class="details p-2 d-flex align-items-center gap-2 border-bottom">
+                <div class="details p-2 d-flex align-items-center gap-2 border-bottom flex-column">
                   <div class="image" style="flex-shrink: 0">
                     <img
                       :src="`${apiUrl}/${userStore.user.avatar}`"
                       class="img-fluid rounded-pill"
-                      style="width: 40px; height: 40px; object-fit: cover"
+                      style="width: 50px; height: 50px; object-fit: cover"
                       :alt="userStore.user.username"
                     />
                   </div>
-                  <div class="usernameEmail">
+                  <div class="usernameEmail text-center">
                     <div class="username fw-bold">{{ userStore.user.username }}</div>
                     <div class="email text-muted small">
                       {{ userStore.user.email }}
