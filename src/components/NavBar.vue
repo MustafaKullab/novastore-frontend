@@ -448,7 +448,7 @@ onUnmounted(() => {
     min-width: 450px;
     background-color: #fefefe;
     @media (max-width: 767px) {
-      right: -155px !important;
+      right: -10px !important;
     }
     .header {
       .countItems {
@@ -463,10 +463,6 @@ onUnmounted(() => {
       border-width: 16px;
       border-style: solid;
       border-color: transparent transparent white transparent;
-
-      @media (max-width: 767px) {
-        display: none !important;
-      }
     }
   }
   .btn-outline-mainColor {
