@@ -445,10 +445,11 @@ onUnmounted(() => {
   .menu {
     top: 45px;
     right: -11px;
-    min-width: 450px;
+    width: 450px;
     background-color: #fefefe;
     @media (max-width: 767px) {
       right: -10px !important;
+      width: 400px;
     }
     .header {
       .countItems {
