@@ -38,7 +38,7 @@
             <img
               :src="`${apiUrl}/${productStore.productDetail.image}`"
               :alt="productStore.productDetail.name"
-              class="img-fluid"
+              class="img-fluid rounded"
               style="max-width: 100%; object-fit: contain"
             />
           </div>
@@ -360,7 +360,7 @@ const filterProducts = computed(() => {
   return productStore.products
     .filter(
       (product) =>
-        product.category === productStore.productDetail.category &&
+        product.categoryId._id === productStore.productDetail.categoryId._id &&
         product._id !== productStore.productDetail._id,
     )
     .slice(0, 8);

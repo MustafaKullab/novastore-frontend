@@ -294,6 +294,8 @@ const saveProduct = async () => {
 
   const data = await response.json();
 
+  console.log(data);
+
   if (data.success) {
     toast.success("Product Addedd Successfully");
     productName.value = "";

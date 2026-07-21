@@ -56,21 +56,33 @@
                 </thead>
                 <tbody>
                   <tr v-for="item of productStore.cart.items" :key="item.productId._id">
-                    <td class="d-flex align-items-center gap-3">
-                      <div class="image">
+                    <td class="d-flex align-items-center gap-3" style="white-space: nowrap">
+                      <div class="image" style="width: 100px; height: 100px; flex-shrink: 0">
                         <img
-                          :src="`${apiUrl}/${item.image}`"
-                          class="img-fluid"
-                          style="width: 80px"
+                          :src="`${apiUrl}/${item.productId.image}`"
+                          class="img-fluid rounded"
+                          style="width: 100%; height: 100%"
                           :alt="item.productId.name"
                         />
                       </div>
-                      <div class="name text-center">{{ item.productId.name }}</div>
-                    </td>
-                    <td class="text-center pt-4">${{ item.productId.price }}</td>
-                    <td class="text-center pt-3">
                       <div
-                        class="btns d-flex align-items-center justify-content-between mx-auto mx-md-start"
+                        class="name text-center"
+                        style="
+                          width: 350px;
+                          overflow: hidden;
+                          text-overflow: ellipsis;
+                          white-space: nowrap;
+                        "
+                      >
+                        {{ item.productId.name }}
+                      </div>
+                    </td>
+                    <td class="text-center pt-4" style="white-space: nowrap">
+                      <div class="mt-4">${{ item.productId.price }}</div>
+                    </td>
+                    <td class="text-center pt-3" style="white-space: nowrap">
+                      <div
+                        class="btns d-flex align-items-center justify-content-between mx-auto mx-md-start mt-4"
                       >
                         <button :disabled="loadingDec">
                           <i class="bi bi-dash fs-4" @click="decreaseQuantity(item)"></i>
@@ -81,15 +93,15 @@
                         </button>
                       </div>
                     </td>
-                    <td class="fw-bold text-center pt-4">
-                      ${{ item.quantity * item.productId.price }}
+                    <td class="fw-bold text-center pt-4 mt-3" style="white-space: nowrap">
+                      <div class="mt-4">${{ item.quantity * item.productId.price }}</div>
                     </td>
                     <td
                       class="delBtn text-center pt-4"
                       @click="deleteItem(item)"
-                      style="cursor: pointer"
+                      style="cursor: pointer; white-space: nowrap"
                     >
-                      <i class="bi bi-trash"></i>
+                      <div class="mt-4"><i class="bi bi-trash"></i></div>
                     </td>
                   </tr>
                 </tbody>

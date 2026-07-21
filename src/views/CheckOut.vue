@@ -82,7 +82,7 @@
                     required
                     v-model="form.country"
                   >
-                    <option selected>Select your country</option>
+                    <option selected value="default" disabled>Select your country</option>
                     <option
                       v-for="country of worldCountries"
                       :key="country.code"
@@ -187,17 +187,27 @@
                 v-for="item of productStore.cart.items"
                 :key="item.productId._id"
               >
-                <div class="image">
+                <div class="image" style="width: 100px; height: 100px; flex-shrink: 0">
                   <img
-                    :src="`${apiUrl}/${item.image}`"
-                    class="img-fluid"
-                    style="width: 80px"
+                    :src="`${apiUrl}/${item.productId.image}`"
+                    class="img-fluid rounded"
+                    style="width: 100%; height: 100%"
                     :alt="item.productId.name"
                   />
                 </div>
                 <div class="details flex-grow-1">
-                  <div class="name">{{ item.productId.name }}</div>
-                  <div class="quantity">Qty: {{ item.quantity }}</div>
+                  <div
+                    class="name"
+                    style="
+                      width: 160px;
+                      white-space: nowrap;
+                      overflow: hidden;
+                      text-overflow: ellipsis;
+                    "
+                  >
+                    {{ item.productId.name }}
+                  </div>
+                  <div class="quantity fw-bold">Qty: {{ item.quantity }}</div>
                 </div>
                 <div class="totalPrice fw-bold">${{ item.quantity * item.productId.price }}</div>
               </div>
@@ -439,7 +449,7 @@ const form = ref({
   fullName: "",
   email: "",
   phone: "",
-  country: "",
+  country: "default",
   city: "",
   state: "",
   street: "",
@@ -517,6 +527,15 @@ onMounted(async () => {
     background-color: #644fe5;
     color: white;
     border: none !important;
+  }
+}
+
+.details {
+  .name {
+    @media (max-width: 767px) {
+      white-space: normal !important;
+      width: 100% !important;
+    }
   }
 }
 </style>

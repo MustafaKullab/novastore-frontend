@@ -32,12 +32,12 @@
             class="category p-3 bg-white d-flex align-items-center gap-2 rounded mb-2 border"
             style="min-height: 210px"
           >
-            <div class="imageSide p-2">
+            <div class="imageSide p-2" style="width: 250px">
               <img
                 :src="`${apiUrl}/${category.image}`"
                 :alt="category.name"
                 class="img-fluid"
-                style="width: 150px"
+                style="width: 100%"
               />
             </div>
             <div class="text-side d-flex align-items-center">

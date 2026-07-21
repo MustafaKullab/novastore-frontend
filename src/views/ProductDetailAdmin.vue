@@ -70,7 +70,7 @@
               <div class="productInformation p-3 bg-white rounded border">
                 <div class="header d-flex align-items-center gap-3 mb-3 pb-3 border-bottom">
                   <div
-                    class="icon d-flex justify-content-center align-items-center rounded-pill border"
+                    class="icon d-flex flex-column flex-lg-row align-items-center align-items-lg-center justify-content-center align-items-center rounded-pill border"
                     style="width: 50px; height: 50px; background-color: #eeedfe; color: #6451f0"
                   >
                     <i class="bi bi-box fs-4"></i>
@@ -80,9 +80,9 @@
 
                 <ul class="list-unstyled my-3">
                   <li
-                    class="d-flex justify-content-between align-items-center pb-3 mb-2 border-bottom"
+                    class="d-flex flex-column flex-lg-row align-items-center align-items-lg-start justify-content-between align-items-center pb-3 mb-2 border-bottom"
                   >
-                    <div class="key d-flex align-items-center gap-4">
+                    <div class="key d-flex align-items-center gap-4 mb-4 mb-lg-0">
                       <div
                         class="icon d-flex justify-content-center align-items-center rounded border"
                         style="width: 40px; height: 40px; background-color: #eeedfe; color: #6451f0"
@@ -91,14 +91,17 @@
                       </div>
                       <div class="text">Product Name</div>
                     </div>
-                    <div class="value fw-bold" style="font-size: 18px">
+                    <div
+                      class="value fw-bold ms-lg-5 text-center text-lg-start px-3 px-lg-0"
+                      style="font-size: 18px"
+                    >
                       {{ productsStore.product.name }}
                     </div>
                   </li>
                   <li
-                    class="d-flex justify-content-between align-items-center pb-3 mb-2 border-bottom"
+                    class="d-flex flex-column flex-lg-row align-items-center align-items-lg-start justify-content-between align-items-center pb-3 mb-2 border-bottom"
                   >
-                    <div class="key d-flex align-items-center gap-4">
+                    <div class="key d-flex align-items-center gap-4 mb-4 mb-lg-0">
                       <div
                         class="icon d-flex justify-content-center align-items-center rounded border"
                         style="width: 40px; height: 40px; background-color: #eeedfe; color: #6451f0"
@@ -107,14 +110,17 @@
                       </div>
                       <div class="text">Description</div>
                     </div>
-                    <div class="value text-end" style="font-size: 18px; width: 350px">
+                    <div
+                      class="value text-center text-lg-start px-3 px-lg-0"
+                      style="font-size: 18px; width: 350px"
+                    >
                       {{ productsStore.product.description }}
                     </div>
                   </li>
                   <li
-                    class="d-flex justify-content-between align-items-center pb-3 mb-2 border-bottom"
+                    class="d-flex flex-column flex-lg-row align-items-center align-items-lg-start justify-content-between align-items-center pb-3 mb-2 border-bottom"
                   >
-                    <div class="key d-flex align-items-center gap-4">
+                    <div class="key d-flex align-items-center gap-4 mb-4 mb-lg-0">
                       <div
                         class="icon d-flex justify-content-center align-items-center rounded border"
                         style="width: 40px; height: 40px; background-color: #eeedfe; color: #6451f0"
@@ -128,9 +134,9 @@
                     </div>
                   </li>
                   <li
-                    class="d-flex justify-content-between align-items-center pb-3 mb-2 border-bottom"
+                    class="d-flex flex-column flex-lg-row align-items-center align-items-lg-start justify-content-between align-items-center pb-3 mb-2 border-bottom"
                   >
-                    <div class="key d-flex align-items-center gap-4">
+                    <div class="key d-flex align-items-center gap-4 mb-4 mb-lg-0">
                       <div
                         class="icon d-flex justify-content-center align-items-center rounded border"
                         style="width: 40px; height: 40px; background-color: #eeedfe; color: #6451f0"
@@ -155,9 +161,9 @@
                     </div>
                   </li>
                   <li
-                    class="d-flex justify-content-between align-items-center pb-3 mb-2 border-bottom"
+                    class="d-flex flex-column flex-lg-row align-items-center align-items-lg-start justify-content-between align-items-center pb-3 mb-2 border-bottom"
                   >
-                    <div class="key d-flex align-items-center gap-4">
+                    <div class="key d-flex align-items-center gap-4 mb-4 mb-lg-0">
                       <div
                         class="icon d-flex justify-content-center align-items-center rounded border"
                         style="width: 40px; height: 40px; background-color: #eeedfe; color: #6451f0"
@@ -178,8 +184,10 @@
                       {{ productsStore.product.categoryId.name }}
                     </div>
                   </li>
-                  <li class="d-flex justify-content-between align-items-center">
-                    <div class="key d-flex align-items-center gap-4">
+                  <li
+                    class="d-flex flex-column flex-lg-row align-items-center align-items-lg-start justify-content-between align-items-center"
+                  >
+                    <div class="key d-flex align-items-center gap-4 mb-4 mb-lg-0">
                       <div
                         class="icon d-flex justify-content-center align-items-center rounded border"
                         style="width: 40px; height: 40px; background-color: #eeedfe; color: #6451f0"
@@ -206,11 +214,14 @@
                   </div>
                   <div class="title fw-bold">Product Image</div>
                 </div>
-                <div class="image mt-3 p-5 rounded" style="background-color: #f6f4fd">
+                <div
+                  class="image mt-3 p-3 rounded"
+                  style="background-color: #f6f4fd; height: fit-content"
+                >
                   <img
                     :src="`${apiUrl}/${productsStore.product.image}`"
                     class="rounded"
-                    style="width: 100%; height: 287px; object-fit: contain"
+                    style="width: 100%; object-fit: cover"
                     :alt="productsStore.product.name"
                   />
                 </div>

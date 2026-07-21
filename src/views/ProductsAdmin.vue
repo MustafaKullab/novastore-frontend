@@ -183,20 +183,24 @@
                   </div>
 
                   <tr v-for="product of filteringProducts" :key="product._id">
-                    <th scope="row">
+                    <th scope="row" style="white-space: nowrap">
                       <div class="productDetails d-flex align-items-center gap-2">
-                        <div class="image p-2 rounded border" style="background-color: #f9f8f9">
+                        <div
+                          class="image p-2 rounded border"
+                          style="background-color: #f9f8f9; width: 80px; flex-shrink: 0"
+                        >
                           <img
                             :src="`${apiUrl}/${product.image}`"
                             :alt="product.name"
-                            style="width: 70px; height: 70px; object-fit: contain"
+                            class="rounded img-fluid"
+                            style="width: 100%; height: 70px; object-fit: cover"
                           />
                         </div>
                         <div class="productName">{{ product.name }}</div>
                       </div>
                     </th>
-                    <td>{{ product.name }}</td>
-                    <td>${{ product.price }}</td>
+                    <td style="white-space: nowrap">{{ product.categoryId.name }}</td>
+                    <td style="white-space: nowrap">${{ product.price }}</td>
                     <td
                       :style="{
                         color:
@@ -206,11 +210,12 @@
                               ? '#f80825'
                               : '#fe7d29',
                       }"
+                      style="white-space: nowrap"
                     >
                       {{ product.stock }}
                     </td>
-                    <td>{{ formatDate(product.createdAt) }}</td>
-                    <td>
+                    <td style="white-space: nowrap">{{ formatDate(product.createdAt) }}</td>
+                    <td style="white-space: nowrap">
                       <div class="actions d-flex align-items-center gap-1">
                         <router-link
                           :to="{ name: 'productDetails', params: { productId: product._id } }"

@@ -13,22 +13,23 @@
 
         <div class="col-md-4 col-lg-3 mb-3" v-for="product of filteringProducts" :key="product._id">
           <div
-            class="product text-center rounded p-3 d-flex flex-column justify-content-between"
+            class="product text-center rounded d-flex flex-column justify-content-between"
+            style="height: 500px"
             v-if="!productStore.loading"
           >
             <div
               class="image mb-2"
-              style="height: 140px; overflow: hidden; cursor: pointer"
+              style="height: 45%; overflow: hidden; cursor: pointer"
               @click="router.push({ name: 'productDetail', params: { product_id: product._id } })"
             >
               <img
                 :src="`${apiUrl}/${product.image}`"
-                class="img-fluid"
-                style="width: 160px"
+                class="img-fluid rounded"
+                style="width: 100%; height: 100%; object-fit: cover"
                 :alt="product.name"
               />
             </div>
-            <div class="details my-2">
+            <div class="details my-2 px-3" style="height: 20%">
               <div
                 class="name fw-bold"
                 style="cursor: pointer"
@@ -44,7 +45,10 @@
                 {{ product.description }}
               </div>
             </div>
-            <div class="stockAndPrice d-flex justify-content-between my-3">
+            <div
+              class="stockAndPrice d-flex justify-content-between align-items-center my-3 px-3"
+              style="height: 5%"
+            >
               <div class="price"><span class="fw-bold">Price :</span> ${{ product.price }}</div>
               <div class="stock">
                 <span v-if="product.stock > 0">{{ product.stock }}</span>
@@ -54,28 +58,30 @@
                 Available
               </div>
             </div>
-            <div class="quantity d-flex justify-content-center align-items-center gap-2 mx-auto">
-              <div class="incBtn">
-                <button @click="increaseQuantity(product._id)"><i class="bi bi-plus"></i></button>
+            <div class="px-3" style="height: 20%">
+              <div class="quantity d-flex justify-content-center align-items-center gap-2 mx-auto">
+                <div class="incBtn">
+                  <button @click="increaseQuantity(product._id)"><i class="bi bi-plus"></i></button>
+                </div>
+                <span class="quantityNumber">{{ quantities[product._id] }}</span>
+                <div class="decBtn">
+                  <button @click="decreaseQuantity(product._id)"><i class="bi bi-dash"></i></button>
+                </div>
               </div>
-              <span class="quantityNumber">{{ quantities[product._id] }}</span>
-              <div class="decBtn">
-                <button @click="decreaseQuantity(product._id)"><i class="bi bi-dash"></i></button>
+              <div class="errorMessage mb-3 text-danger" v-if="quantityMessage[product._id]">
+                {{ quantityMessage[product._id] }}
               </div>
-            </div>
-            <div class="errorMessage mb-3 text-danger" v-if="quantityMessage[product._id]">
-              {{ quantityMessage[product._id] }}
-            </div>
-            <div class="actions">
-              <button
-                type="button"
-                class="addToCart btn w-100"
-                :data-bs-toggle="!userStore.user ? 'modal' : ''"
-                :data-bs-target="!userStore.user ? `#loginModal` : ''"
-                @click.prevent="addToCart(product)"
-              >
-                Add to cart <i class="bi bi-cart-plus"></i>
-              </button>
+              <div class="actions">
+                <button
+                  type="button"
+                  class="addToCart btn w-100"
+                  :data-bs-toggle="!userStore.user ? 'modal' : ''"
+                  :data-bs-target="!userStore.user ? `#loginModal` : ''"
+                  @click.prevent="addToCart(product)"
+                >
+                  Add to cart <i class="bi bi-cart-plus"></i>
+                </button>
+              </div>
             </div>
           </div>
         </div>

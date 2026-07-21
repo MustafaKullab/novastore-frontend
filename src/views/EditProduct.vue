@@ -187,7 +187,7 @@
                       :src="`${apiUrl}/${productsStore.product.image}`"
                       :alt="productsStore.product.name"
                       class="img-fluid rounded"
-                      style="width: 100%; height: 250px; object-fit: contain"
+                      style="width: 100%; height: 250px; object-fit: cover"
                     />
                     <div
                       class="trash position-absolute bg-white rounded-pill d-flex align-items-center justify-content-center"

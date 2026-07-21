@@ -377,6 +377,21 @@ table {
   }
 }
 
+.details {
+  .productName {
+    width: 225px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    @media (max-width: 1300px) {
+      width: 125px !important;
+    }
+    @media (max-width: 767px) {
+      width: 325px !important;
+    }
+  }
+}
+
 .productLow {
   @media (max-width: 767px) {
     width: 100% !important;

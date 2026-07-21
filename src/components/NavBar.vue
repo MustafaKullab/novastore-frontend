@@ -122,7 +122,10 @@
                     v-for="item of productsStore.cart.items"
                     :key="item.productId._id"
                   >
-                    <div class="image p-2 bg-light rounded my-2" style="width: fit-content">
+                    <div
+                      class="image p-2 bg-light rounded my-2"
+                      style="width: fit-content; flex-shrink: 0"
+                    >
                       <img
                         :src="`${apiUrl}/${item.productId.image}`"
                         class="img-fluid"
@@ -132,7 +135,17 @@
                     </div>
                     <div class="details d-flex justify-content-between flex-grow-1 border-end pe-2">
                       <div class="nameAndPrice">
-                        <div class="name fw-bold">{{ item.productId.name }}</div>
+                        <div
+                          class="name fw-bold"
+                          style="
+                            width: 185px;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
+                          "
+                        >
+                          {{ item.productId.name }}
+                        </div>
                         <div class="price">
                           Price :
                           <span style="color: var(--main-color)">${{ item.productId.price }}</span>

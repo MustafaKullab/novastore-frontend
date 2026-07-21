@@ -189,11 +189,12 @@
               >
                 <td>
                   <div class="d-flex align-items-center gap-3">
-                    <div class="image">
+                    <div class="image" style="width: 100px; height: 100px">
                       <img
                         :src="`${apiUrl}/${item.productId?.image}`"
-                        style="width: 80px; object-fit: contain"
+                        style="width: 100%; height: 100%; object-fit: cover; flex-shrink: 0"
                         :alt="item.productId?.name"
+                        class="rounded"
                       />
                     </div>
                     <div class="productDetails flex-grow-1">

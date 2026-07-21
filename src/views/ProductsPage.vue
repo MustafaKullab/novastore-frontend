@@ -214,55 +214,51 @@
             </div>
 
             <div class="productsContainer py-5 row" v-if="!productStore.loading">
-              <div
-                class="col-md-4"
-                v-for="product of filteringProducts"
-                :key="product._id"
-                style="min-height: 450px"
-              >
-                <div class="product bg-white text-center p-3 mb-2 rounded border">
+              <div class="col-md-4" v-for="product of filteringProducts" :key="product._id">
+                <div
+                  class="product bg-white text-center mb-2 rounded border d-flex flex-column"
+                  style="height: 530px"
+                >
                   <div
-                    class="image p-2 rounded"
-                    style="background-color: #fafafa"
+                    class="image rounded"
+                    style="background-color: #fafafa; height: 40%; overflow: hidden"
                     @click="
                       router.push({ name: 'productDetail', params: { product_id: product._id } })
                     "
                   >
                     <img
                       :src="`${apiUrl}/${product.image}`"
-                      class="img-fluid"
-                      style="width: 150px; height: 150px; cursor: pointer; object-fit: contain"
+                      class="img-fluid rounded"
+                      style="cursor: pointer; object-fit: cover; height: 100%; width: 100%"
                       alt="Books"
                     />
                   </div>
                   <div
-                    class="categoryName mt-2 text-start"
-                    style="
-                      color: var(--main-color);
-                      font-weight: 500;
-                      height: 30px;
-                      cursor: pointer;
-                    "
+                    class="categoryName my-2 text-start px-3 d-flex align-items-center"
+                    style="color: var(--main-color); font-weight: 500; height: 7%; cursor: pointer"
                     @click="
                       router.push({ name: 'productDetail', params: { product_id: product._id } })
                     "
                   >
-                    {{ product.category }}
+                    {{ product.categoryId.name }}
                   </div>
                   <div
-                    class="productName text-center"
-                    style="height: 50px; cursor: pointer"
+                    class="productName text-center px-3"
+                    style="height: 15%; cursor: pointer"
                     @click="
                       router.push({ name: 'productDetail', params: { product_id: product._id } })
                     "
                   >
                     {{ product.name }}
                   </div>
-                  <div class="productPrice fw-bold text-start" style="height: 30px">
-                    ${{ product.price }}
-                  </div>
-                  <div class="availability text-start text-success" style="height: 30px">
-                    {{ product.stock }} Available
+                  <div
+                    class="priceAndAvaliable d-flex flex-column justify-content-center"
+                    style="height: 15%"
+                  >
+                    <div class="productPrice fw-bold text-start px-3">${{ product.price }}</div>
+                    <div class="availability text-start text-success px-3">
+                      {{ product.stock }} Available
+                    </div>
                   </div>
                   <div
                     class="quantity d-flex justify-content-center align-items-center gap-2 mx-auto"
@@ -274,7 +270,7 @@
                       </button>
                     </div>
                     <span class="quantityNumber">{{ quantities[product._id] }}</span>
-                    <div class="decBtn">
+                    <div>
                       <button @click="decreaseQuantity(product._id)">
                         <i class="bi bi-dash"></i>
                       </button>
@@ -283,7 +279,7 @@
                   <div class="errorMessage mb-3 text-danger" v-if="quantityMessage[product._id]">
                     {{ quantityMessage[product._id] }}
                   </div>
-                  <div class="addToCartBtn" style="height: 35px" @click="addToCart(product)">
+                  <div class="addToCartBtn px-3" style="height: 35px" @click="addToCart(product)">
                     <button
                       class="btn btn-mainColor w-100"
                       :data-bs-toggle="!userStore.user ? 'modal' : ''"
