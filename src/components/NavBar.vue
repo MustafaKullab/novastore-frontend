@@ -449,7 +449,7 @@ onUnmounted(() => {
     background-color: #fefefe;
     @media (max-width: 767px) {
       right: -10px !important;
-      width: 400px;
+      width: 300px;
     }
     .header {
       .countItems {
