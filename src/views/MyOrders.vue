@@ -25,14 +25,14 @@
       </div>
       <div
         class="displayOrders p-4 bg-white border rounded my-4 position-relative"
-        style="height: 400px"
+        style="height: 400px; overflow: auto"
       >
         <div
           v-if="ordersFiltering.length === 0"
-          class="position-absolute text-center"
+          class="noOrders py-3 position-absolute text-center"
           style="top: 50%; left: 50%; transform: translate(-50%, -50%)"
         >
-          <div class="icon">
+          <div class="iconEmp">
             <i class="bi bi-bag-x text-warning" style="font-size: 70px"></i>
           </div>
           <div class="title"><h3 style="color: #1f2937">No Orders Yet!</h3></div>
@@ -254,6 +254,15 @@ onMounted(async () => {
     &.cancelled::before {
       background-color: #666f7d !important;
     }
+  }
+}
+@media (max-width: 767px) {
+  .iconEmp {
+    display: none;
+  }
+  .noOrders {
+    top: 90% !important;
+    width: 90% !important;
   }
 }
 </style>

@@ -553,4 +553,22 @@ onUnmounted(() => {
 .fade-leave-active {
   transition: 0.4s;
 }
+
+@media (max-width: 767px) {
+  .container-fluid {
+    .navbar-toggler {
+      margin-right: 0 !important;
+    }
+    justify-content: space-around !important;
+  }
+  .navbar-brand {
+    width: 100% !important;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .cart {
+    order: 2 !important;
+  }
+}
 </style>
