@@ -39,16 +39,18 @@
               </div>
               <div
                 class="description"
-                style="cursor: pointer"
+                style="
+                  cursor: pointer;
+                  white-space: nowrap;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                "
                 @click="router.push({ name: 'productDetail', params: { product_id: product._id } })"
               >
                 {{ product.description }}
               </div>
             </div>
-            <div
-              class="stockAndPrice d-flex justify-content-between align-items-center my-3 px-3"
-              style="height: 5%"
-            >
+            <div class="stockAndPrice d-flex justify-content-between align-items-center my-3 px-3">
               <div class="price"><span class="fw-bold">Price :</span> ${{ product.price }}</div>
               <div class="stock">
                 <span v-if="product.stock > 0">{{ product.stock }}</span>
@@ -420,6 +422,20 @@ onMounted(async () => {
     transition: 0.3s;
     &:hover {
       background-color: #eee !important;
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .image {
+    height: 65% !important;
+  }
+  .details {
+    height: 10% !important;
+    .name {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 }

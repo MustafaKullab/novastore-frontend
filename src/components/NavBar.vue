@@ -71,7 +71,12 @@
         </div>
         <div class="actions d-flex align-items-center gap-3">
           <div class="cart cursor-pointer mb-1 position-relative">
-            <i class="bi bi-bag" style="font-size: 19px" @click.stop="showMenuFunction"></i>
+            <i
+              class="bi bi-bag"
+              style="font-size: 19px"
+              @click.stop="showMenuFunction"
+              ref="cartIcon"
+            ></i>
             <div
               class="countOfItems position-absolute rounded-pill text-light d-flex justify-content-center align-items-center"
               style="
@@ -88,7 +93,7 @@
             <transition name="fade" mode="out-in">
               <div
                 class="menu rounded p-3 position-absolute shadow-sm"
-                v-if="showMenu"
+                v-show="showMenu"
                 ref="menuElement"
               >
                 <div
@@ -283,10 +288,10 @@
                       class="text-decoration-none rounded"
                       style="color: #1e2634"
                     >
-                      <li class="py-2 rounded d-flex align-items-center gap-2">
+                      <div class="py-2 rounded d-flex align-items-center gap-2">
                         <div><i class="bi bi-box-arrow-left"></i></div>
                         <div>Logout</div>
-                      </li>
+                      </div>
                     </router-link>
                   </li>
                 </ul>
@@ -320,6 +325,7 @@ const userStore = useUserStore();
 // Store the element of menu
 const menuElement = ref(null);
 const showMenu = ref(false);
+const cartIcon = ref(null);
 
 // Function to show the menu
 const showMenuFunction = () => {
@@ -335,7 +341,11 @@ const subtotal = computed(() => {
 });
 
 const handleWithClickOutsideMenu = (e) => {
-  if (menuElement.value && !menuElement.value.contains(e.target)) {
+  if (
+    menuElement.value &&
+    !menuElement.value.contains(e.target) &&
+    !cartIcon.value.contains(e.target)
+  ) {
     showMenu.value = false;
   }
 };
@@ -464,6 +474,7 @@ onUnmounted(() => {
       border-width: 16px;
       border-style: solid;
       border-color: transparent transparent white transparent;
+      pointer-events: none;
     }
   }
   .btn-outline-mainColor {
