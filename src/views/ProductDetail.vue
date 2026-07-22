@@ -39,7 +39,7 @@
               :src="`${apiUrl}/${productStore.productDetail.image}`"
               :alt="productStore.productDetail.name"
               class="img-fluid rounded"
-              style="max-width: 100%; object-fit: contain"
+              style="width: 100%; object-fit: contain"
             />
           </div>
         </div>
