@@ -169,12 +169,12 @@
                 style="min-width: 350px; cursor: pointer"
                 @click="goToProductPage(product)"
               >
-                <div class="image">
+                <div class="image p-2 rounded" style="width: 100px; background-color: #f5f4fd">
                   <img
                     :src="`${apiUrl}/${product.image}`"
                     :alt="product.name"
-                    class="img-fluid"
-                    style="width: 160px; object-fit: contain"
+                    class="img-fluid rounded"
+                    style="width: 100%; object-fit: cover"
                   />
                 </div>
                 <div class="details">
