@@ -282,18 +282,19 @@
                       </li>
                     </router-link>
                   </div>
-                  <li @click="logout">
-                    <router-link
-                      :to="{ name: 'login' }"
-                      class="text-decoration-none rounded"
-                      style="color: #1e2634"
-                    >
-                      <div class="py-2 rounded d-flex align-items-center gap-2">
+                  <router-link
+                    @click="logout"
+                    :to="{ name: 'login' }"
+                    class="text-decoration-none rounded"
+                    style="color: #1e2634"
+                  >
+                    <li class="rounded">
+                      <div class="logoutDiv rounded d-flex align-items-center gap-2">
                         <div><i class="bi bi-box-arrow-left"></i></div>
                         <div>Logout</div>
                       </div>
-                    </router-link>
-                  </li>
+                    </li>
+                  </router-link>
                 </ul>
               </div>
             </div>
@@ -525,6 +526,7 @@ onUnmounted(() => {
     transition: 0.3s;
     display: block;
     padding: 0 5px;
+
     li {
       padding: 10px;
       transition: 0.3s;
