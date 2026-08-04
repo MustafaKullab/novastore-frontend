@@ -1,5 +1,9 @@
 <template>
-  <div class="ProductPage py-4" style="background-color: var(--background-section)">
+  <div
+    ref="productsPage"
+    class="ProductPage py-4"
+    style="background-color: var(--background-section)"
+  >
     <div class="container">
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -57,7 +61,7 @@
                       <div class="accordion-body">
                         <div
                           class="catrgory d-flex align-items-center justify-content-between mb-2"
-                          @click="categoryStore.setCategory('All')"
+                          @click="clearFilter"
                         >
                           <div class="form-check">
                             <input
@@ -80,7 +84,7 @@
                           class="catrgory d-flex align-items-center justify-content-between mb-2"
                           v-for="category of categoryStore.categories"
                           :key="category._id"
-                          @click="categoryStore.setCategory(category._id)"
+                          @click="updateCategory(category._id)"
                         >
                           <div class="form-check">
                             <input
@@ -128,8 +132,9 @@
                         >
                           <div
                             class="opt1 p-2 border rounded text-center"
+                            :class="{ active: priceActive == 0 }"
                             style="width: fit-content; background-color: #f8fafa; cursor: pointer"
-                            @click="setFromTo(0, 50)"
+                            @click="setFromToProducts(0, 50)"
                           >
                             <span class="from">$0</span>
                             <span> - </span>
@@ -138,8 +143,9 @@
 
                           <div
                             class="opt2 p-2 border rounded text-center"
+                            :class="{ active: priceActive == 50 }"
                             style="width: fit-content; background-color: #f8fafa; cursor: pointer"
-                            @click="setFromTo(50, 150)"
+                            @click="setFromToProducts(50, 150)"
                           >
                             <span class="from">$50</span>
                             <span> - </span>
@@ -147,8 +153,9 @@
                           </div>
                           <div
                             class="opt3 p-2 border rounded text-center"
+                            :class="{ active: priceActive == 150 }"
                             style="width: fit-content; background-color: #f8fafa; cursor: pointer"
-                            @click="setFromTo(150, 300)"
+                            @click="setFromToProducts(150, 300)"
                           >
                             <span class="from">$150</span>
                             <span> - </span>
@@ -156,8 +163,9 @@
                           </div>
                           <div
                             class="opt4 p-2 border rounded text-center"
+                            :class="{ active: priceActive == 300 }"
                             style="width: fit-content; background-color: #f8fafa; cursor: pointer"
-                            @click="setFromTo(300, 200000000)"
+                            @click="setFromToProducts(300, 200000000)"
                           >
                             <span>$300 + </span>
                           </div>
@@ -187,7 +195,7 @@
               <div
                 class="category py-2 px-3 rounded-pill bg-white me-md-2"
                 style="cursor: pointer; font-size: 14px"
-                @click="categoryStore.setCategory('All')"
+                @click="clearFilter"
                 :class="{ active: categoryStore.selectedCategory === 'All' }"
               >
                 All Products
@@ -197,7 +205,7 @@
                 style="cursor: pointer; font-size: 14px"
                 v-for="category of categoryStore.categories"
                 :key="category._id"
-                @click="categoryStore.setCategory(category._id)"
+                @click="updateCategory(category._id)"
                 :class="{ active: categoryStore.selectedCategory === category._id }"
               >
                 {{ category.name }}
@@ -214,7 +222,7 @@
             </div>
 
             <div class="productsContainer py-5 row" v-if="!productStore.loading">
-              <div class="col-md-4" v-for="product of filteringProducts" :key="product._id">
+              <div class="col-md-4" v-for="product of productStore.products" :key="product._id">
                 <div
                   class="product bg-white text-center mb-2 rounded border d-flex flex-column"
                   style="height: 530px"
@@ -409,6 +417,54 @@
               </div>
             </div>
           </div>
+          <div
+            v-if="!productStore.loading && productStore.products.length === 0"
+            class="noProducts text-center py-5 mb-5"
+          >
+            <i class="bi bi-box-seam fs-1 text-muted" style="color: #5322be !important"></i>
+            <h4 class="mt-3" style="color: #5322be">No products found</h4>
+            <p class="text-muted">Try changing your filters or category.</p>
+          </div>
+          <div
+            class="paginiationCont d-flex align-items-center justify-content-center gap-3"
+            v-if="productStore.products.length > 0"
+          >
+            <nav aria-label="Page navigation example">
+              <ul class="pagination d-flex gap-2">
+                <li class="page-item cursor-pointer">
+                  <a
+                    :class="{
+                      disabled: !productStore.productspagination.hasPrevPage,
+                    }"
+                    class="page-link"
+                    @click="changePage(productStore.productspagination.currentPage - 1)"
+                  >
+                    Previous
+                  </a>
+                </li>
+                <li
+                  class="page-item cursor-pointer"
+                  v-for="(page, i) of productStore.productspagination.totalPages"
+                  :key="i"
+                >
+                  <a
+                    :class="{ active: page === productStore.productspagination.currentPage }"
+                    class="page-link rounded"
+                    @click="changePage(page)"
+                    >{{ page }}</a
+                  >
+                </li>
+                <li class="page-item cursor-pointer">
+                  <a
+                    :class="{ disabled: !productStore.productspagination.hasNextPage }"
+                    class="page-link"
+                    @click="changePage(productStore.productspagination.currentPage + 1)"
+                    >Next</a
+                  >
+                </li>
+              </ul>
+            </nav>
+          </div>
         </div>
       </div>
     </div>
@@ -432,15 +488,16 @@ const categoryStore = useCategoryStore();
 const productStore = useProductsStore();
 const userStore = useUserStore();
 
-// Variables to store the from and to (price)
-const from = ref(0);
-const to = ref(200000000);
+// Element of page
+const productsPage = ref(null);
 
 // Variable to store the quantity of product
 const quantities = ref({});
 
 // Variable to store the error message
 const quantityMessage = ref({});
+
+const priceActive = ref();
 
 // Close button of modal element
 const closeModal = ref(null);
@@ -453,36 +510,36 @@ watch(
   { deep: true },
 );
 
-// Function to reset from and tp value
-const setFromTo = (f, t) => {
-  from.value = f;
-  to.value = t;
-};
-
 // Function to reset price
 const resetPrice = () => {
-  from.value = 0;
-  to.value = 200000000;
+  priceActive.value = -1;
+  productStore.getProducts({ limit: 6, min: null, max: null });
 };
 
-//Filter the products
-const filteringProducts = computed(() => {
-  return productStore.products.filter((product) => {
-    const matchCategory =
-      categoryStore.selectedCategory === "All" ||
-      product.categoryId._id === categoryStore.selectedCategory; // وتتم المقارنة مع الصنف المختار  false تصير  All يجيب كل المنتجات اما اذا منتج معين ال  All  هنا دائما ياخذ النوع ويفحص اذا
+const setFromToProducts = (min, max) => {
+  priceActive.value = min;
+  productStore.getProducts({ limit: 6, min, max });
+};
 
-    const priceMatch = product.price >= from.value && product.price <= to.value;
-
-    return matchCategory && priceMatch;
+const changePage = async (page) => {
+  productsPage.value?.scrollIntoView({
+    behavior: "smooth",
+    block: "start",
   });
-});
+
+  const limit = 6;
+  await productStore.getProducts({ page, limit });
+};
+
+const updateCategory = (categoryId) => {
+  productStore.getProducts({ limit: 6, categoryId });
+  categoryStore.selectedCategory = categoryId;
+};
 
 // Function to clear the filter
 const clearFilter = () => {
   categoryStore.selectedCategory = "All";
-  from.value = 0;
-  to.value = 200000000;
+  productStore.getProducts({ limit: 6, categoryId: null });
 };
 
 // Function to increase the quantity of product
@@ -537,7 +594,7 @@ const goToSignPage = () => {
 const apiUrl = import.meta.env.VITE_API_URL;
 
 onMounted(async () => {
-  await productStore.getProducts();
+  await productStore.getProducts({ limit: 6 });
   productStore.products.forEach((product) => {
     quantities.value[product._id] = 1;
   });
@@ -548,6 +605,9 @@ onMounted(async () => {
 </script>
 
 <style lang="scss" scoped>
+.cursor-pointer {
+  cursor: pointer;
+}
 .filter {
   @media (min-width: 991px) {
     position: sticky;
@@ -569,6 +629,9 @@ onMounted(async () => {
 .fromTo {
   @media (max-width: 767px) {
     flex-direction: column;
+  }
+  div.active {
+    background-color: #ebebeb !important;
   }
   div {
     transition: 0.3s;
@@ -603,12 +666,13 @@ onMounted(async () => {
         text-align: center;
         margin-bottom: 10px;
       }
-      border: 2px solid #ebedf1;
+      border: 1px solid #d2d9e7;
       transition: 0.3s;
       &:hover,
       &.active {
-        background-color: #f1f1fd !important;
-        color: var(--main-color);
+        background-color: var(--main-color) !important;
+        color: white;
+        border-color: white;
       }
     }
   }
@@ -711,6 +775,23 @@ onMounted(async () => {
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+a.page-link {
+  border-color: #e5e7eb !important;
+  color: #6366f1 !important;
+  &:hover {
+    background-color: #eef2ff !important;
+    border-color: #6366f1 !important;
+  }
+  &.active {
+    background: linear-gradient(135deg, #6366f1, #7c3aed) !important;
+    color: white !important;
+    border-color: #6366f1 !important;
+  }
+  &.disabled {
+    color: gray !important;
   }
 }
 

@@ -267,7 +267,12 @@
                   class="image p-2 rounded border"
                   style="background-color: #f8f8f8; width: fit-content"
                 >
-                  <img :src="`${apiUrl}/${product.image}`" style="width: 70px" alt="product" />
+                  <img
+                    :src="`${apiUrl}/${product.image}`"
+                    style="width: 70px; height: 70px"
+                    alt="product"
+                    class="rounded"
+                  />
                 </div>
                 <div class="details">
                   <div class="productName fw-bold mb-1">{{ product.name }}</div>
@@ -387,7 +392,7 @@ table {
       width: 125px !important;
     }
     @media (max-width: 767px) {
-      width: 325px !important;
+      width: 225px !important;
     }
   }
 }
@@ -395,6 +400,9 @@ table {
 .productLow {
   @media (max-width: 767px) {
     width: 100% !important;
+  }
+  @media (min-width: 768px) {
+    border: none !important;
   }
 }
 </style>

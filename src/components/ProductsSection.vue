@@ -1,5 +1,5 @@
 <template>
-  <div class="ProductsSection" id="products">
+  <div class="ProductsSection" ref="productsContainer" id="products">
     <div class="container">
       <div class="title">
         <h4>Products</h4>
@@ -11,7 +11,11 @@
           </div>
         </div>
 
-        <div class="col-md-4 col-lg-3 mb-3" v-for="product of filteringProducts" :key="product._id">
+        <div
+          class="col-md-4 col-lg-3 mb-3"
+          v-for="product of productStore.products"
+          :key="product._id"
+        >
           <div
             class="product text-center rounded d-flex flex-column justify-content-between"
             style="height: 500px"
@@ -86,6 +90,43 @@
               </div>
             </div>
           </div>
+        </div>
+        <div class="paginiationCont d-flex align-items-center justify-content-center gap-3">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination d-flex gap-2">
+              <li class="page-item cursor-pointer">
+                <a
+                  :class="{
+                    disabled: !productStore.productspagination.hasPrevPage,
+                  }"
+                  class="page-link"
+                  @click="changePage(productStore.productspagination.currentPage - 1)"
+                >
+                  Previous
+                </a>
+              </li>
+              <li
+                class="page-item cursor-pointer"
+                v-for="(page, i) of productStore.productspagination.totalPages"
+                :key="i"
+              >
+                <a
+                  :class="{ active: page === productStore.productspagination.currentPage }"
+                  class="page-link rounded"
+                  @click="changePage(page)"
+                  >{{ page }}</a
+                >
+              </li>
+              <li class="page-item cursor-pointer">
+                <a
+                  :class="{ disabled: !productStore.productspagination.hasNextPage }"
+                  class="page-link"
+                  @click="changePage(productStore.productspagination.currentPage + 1)"
+                  >Next</a
+                >
+              </li>
+            </ul>
+          </nav>
         </div>
       </div>
       <div
@@ -190,10 +231,9 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watch } from "vue";
+import { ref, onMounted, watch } from "vue";
 import { useRouter } from "vue-router";
 import { useProductsStore } from "@/stores/products";
-import { useCategoryStore } from "@/stores/category";
 import { useUserStore } from "@/stores/user";
 import { fetchWithRefresh } from "../../public/fetchWithRefresh";
 import { toast } from "vue3-toastify";
@@ -203,7 +243,6 @@ const router = useRouter();
 
 // Define stores
 const productStore = useProductsStore();
-const categoryStore = useCategoryStore();
 const userStore = useUserStore();
 
 //quantities of products
@@ -215,6 +254,8 @@ const quantityMessage = ref({});
 // Variable to get close button
 const closeModal = ref(null);
 
+const productsContainer = ref(null);
+
 watch(
   quantities,
   () => {
@@ -223,17 +264,15 @@ watch(
   { deep: true },
 );
 
-//Filter the products
-const filteringProducts = computed(() => {
-  if (categoryStore.selectedCategory === "All") {
-    return productStore.products.slice(0, 8);
-  }
-  return productStore.products
-    .filter((product) => {
-      return product.categoryId._id === categoryStore.selectedCategory;
-    })
-    .slice(0, 9);
-});
+const changePage = async (page) => {
+  productsContainer.value?.scrollIntoView({
+    behavior: "smooth",
+    block: "start",
+  });
+
+  const limit = 8;
+  await productStore.getProducts({ page, limit });
+};
 
 // Function to increase quantity
 const increaseQuantity = (id) => {
@@ -290,15 +329,23 @@ const apiUrl = import.meta.env.VITE_API_URL;
 onMounted(async () => {
   await productStore.getProducts();
 
-  productStore.products.forEach((product) => {
-    quantities.value[product._id] = 1;
-  });
+  if (productStore.products.length) {
+    productStore.products.forEach((product) => {
+      quantities.value[product._id] = 1;
+    });
+  }
+
+  console.log(productStore.productspagination);
 
   await userStore.getUser();
 });
 </script>
 
 <style lang="scss" scoped>
+.cursor-pointer {
+  cursor: pointer;
+}
+
 .product {
   background-color: #f8f8fc;
   border: 2px solid #f4f4f8;
@@ -437,6 +484,23 @@ onMounted(async () => {
       overflow: hidden;
       text-overflow: ellipsis;
     }
+  }
+}
+
+a.page-link {
+  border-color: #e5e7eb !important;
+  color: #6366f1 !important;
+  &:hover {
+    background-color: #eef2ff !important;
+    border-color: #6366f1 !important;
+  }
+  &.active {
+    background: linear-gradient(135deg, #6366f1, #7c3aed) !important;
+    color: white !important;
+    border-color: #6366f1 !important;
+  }
+  &.disabled {
+    color: gray !important;
   }
 }
 </style>

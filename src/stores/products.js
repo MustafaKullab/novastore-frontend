@@ -1,8 +1,10 @@
 import { defineStore } from "pinia";
 import { fetchWithRefresh } from "../../public/fetchWithRefresh";
+
 export const useProductsStore = defineStore("products", {
   state: () => ({
     products: [],
+    productspagination: {},
     cart: { _id: null, userId: null, items: [] },
     productDetail: null,
     currentOrder: null,
@@ -14,6 +16,7 @@ export const useProductsStore = defineStore("products", {
     recentMessages: [],
     lowStockProducts: [],
     orders: [],
+    ordersPagination: {},
     lengthOutOfStockProducts: 0,
     allOrders: [],
     product: null,
@@ -22,17 +25,59 @@ export const useProductsStore = defineStore("products", {
     loading: false,
   }),
   actions: {
-    async getProducts() {
+    async getProducts({ page = 1, limit = 8, categoryId = null, min = null, max = null } = {}) {
       try {
         this.loading = true;
-        const response = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/products`, {
+
+        console.log(page);
+
+        let url = `${import.meta.env.VITE_API_URL}/products?page=${page}&limit=${limit}`;
+
+        if (min !== null && max !== null) {
+          url += `&minPrice=${min}&maxPrice=${max}`;
+        }
+
+        if (categoryId) {
+          url += `&categoryIdFilt=${categoryId}`;
+        }
+
+        const response = await fetchWithRefresh(url, {
           method: "GET",
           credentials: "include",
         });
 
         const data = await response.json();
 
-        this.products = data.products;
+        this.productspagination = data.pagination || {
+          hasPrevPage: false,
+          hasNextPage: false,
+          currentPage: 1,
+          totalPages: 1,
+        };
+
+        this.products = data.products || [];
+        console.log(this.products);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        this.loading = false;
+      }
+    },
+
+    async getProductsAdmin() {
+      try {
+        this.loading = true;
+
+        let url = `${import.meta.env.VITE_API_URL}/productsAdmin`;
+
+        const response = await fetchWithRefresh(url, {
+          method: "GET",
+          credentials: "include",
+        });
+
+        const data = await response.json();
+
+        this.products = data.products || [];
       } catch (error) {
         console.log(error);
       } finally {
@@ -115,14 +160,26 @@ export const useProductsStore = defineStore("products", {
       }
     },
 
-    async getAllOrders() {
-      const response = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/allOrders`, {
+    async getAllOrders({ page = 1, limit = 6, search = null } = {}) {
+      console.log(page, limit);
+      console.log("Done!");
+
+      let url = `${import.meta.env.VITE_API_URL}/allOrders?page=${page}&limit=${limit}`;
+
+      if (search) {
+        url += `&search=${search}`;
+      }
+
+      const response = await fetchWithRefresh(url, {
         method: "GET",
         credentials: "include",
       });
 
       const data = await response.json();
 
+      console.log(data);
+
+      this.ordersPagination = data.pagination;
       this.orders = data.orders;
     },
 
@@ -205,10 +262,13 @@ export const useProductsStore = defineStore("products", {
     },
 
     async getLowStockProducts() {
-      const response = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/lowStockProducts`, {
-        method: "GET",
-        credentials: "include",
-      });
+      const response = await fetchWithRefresh(
+        `${import.meta.env.VITE_API_URL}/lowStockProducts?sort=priceAsc`,
+        {
+          method: "GET",
+          credentials: "include",
+        },
+      );
 
       const data = await response.json();
 

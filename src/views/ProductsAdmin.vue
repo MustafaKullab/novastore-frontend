@@ -283,10 +283,6 @@ const outOfStockProducts = computed(() => {
 
 // Computed to filter the products
 const filteringProducts = computed(() => {
-  // const categoryFilter = productsStore.products.filter((product) =>
-  //   categoryResult.value === "all" ? product : product.categoryId._id === categoryResult.value,
-  // );
-
   return (
     stockResult.value === "all"
       ? productsStore.products
@@ -329,8 +325,7 @@ const deleteProduct = async (id) => {
 const apiUrl = import.meta.env.VITE_API_URL;
 
 onMounted(async () => {
-  await productsStore.getProducts();
-  console.log(productsStore.products);
+  await productsStore.getProductsAdmin();
 
   await categoriesStore.getCategories();
   await categoriesStore.getCategoriesLength();

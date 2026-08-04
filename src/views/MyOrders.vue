@@ -1,5 +1,5 @@
 <template>
-  <div class="MyOrders py-4" style="background-color: var(--background-section)">
+  <div ref="MyOrdersPage" class="MyOrders py-4" style="background-color: var(--background-section)">
     <div class="container">
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -28,7 +28,7 @@
         style="height: 400px; overflow: auto"
       >
         <div
-          v-if="ordersFiltering.length === 0"
+          v-if="productsStore.orders.length === 0"
           class="noOrders py-3 position-absolute text-center"
           style="top: 50%; left: 50%; transform: translate(-50%, -50%)"
         >
@@ -52,50 +52,54 @@
           <div
             class="state all"
             :class="{ active: filterWord === 'all' }"
-            @click="filterWord = 'all'"
+            @click="getOrdersFiltering('All')"
           >
             All Orders
           </div>
           <div
             class="state pending"
             :class="{ active: filterWord === 'pending' }"
-            @click="filterWord = 'pending'"
+            @click="getOrdersFiltering('pending')"
           >
             Pending
           </div>
           <div
             class="state processing"
             :class="{ active: filterWord === 'processing' }"
-            @click="filterWord = 'processing'"
+            @click="getOrdersFiltering('processing')"
           >
             Processing
           </div>
           <div
             class="state shipped"
             :class="{ active: filterWord === 'shipped' }"
-            @click="filterWord = 'shipped'"
+            @click="getOrdersFiltering('shipped')"
           >
             Shipped
           </div>
           <div
             class="state delivered"
             :class="{ active: filterWord === 'delivered' }"
-            @click="filterWord = 'delivered'"
+            @click="getOrdersFiltering('delivered')"
           >
             Delivered
           </div>
           <div
             class="state cancelled"
             :class="{ active: filterWord === 'cancelled' }"
-            @click="filterWord = 'cancelled'"
+            @click="getOrdersFiltering('cancelled')"
           >
             Cancelled
           </div>
         </div>
-        <div class="orders mt-5" style="max-height: 600px; overflow: auto" v-if="ordersFiltering">
+        <div
+          class="orders mt-5"
+          style="max-height: 600px; overflow: auto"
+          v-if="productsStore.orders"
+        >
           <div
             class="order p-3 border rounded d-flex align-items-center justify-content-between mb-3 flex-column flex-lg-row"
-            v-for="order of ordersFiltering"
+            v-for="order of productsStore.orders"
             :key="order._id"
           >
             <div class="orderDate text-center text-lg-start mb-3 mb-lg-0">
@@ -167,36 +171,92 @@
           </div>
         </div>
       </div>
+      <div
+        class="paginiationCont d-flex align-items-center justify-content-center gap-3"
+        v-if="productsStore.orders.length > 0"
+      >
+        <nav aria-label="Page navigation example">
+          <ul class="pagination d-flex gap-2">
+            <li class="page-item cursor-pointer">
+              <a
+                :class="{
+                  disabled: !productsStore.ordersPagination.hasPrevPage,
+                }"
+                class="page-link"
+                @click="changePage(productsStore.ordersPagination.currentPage - 1)"
+              >
+                Previous
+              </a>
+            </li>
+            <li
+              class="page-item cursor-pointer"
+              v-for="(page, i) of productsStore.ordersPagination.totalPages"
+              :key="i"
+            >
+              <a
+                :class="{ active: page === productsStore.ordersPagination.currentPage }"
+                class="page-link rounded"
+                @click="changePage(page)"
+                >{{ page }}</a
+              >
+            </li>
+            <li class="page-item cursor-pointer">
+              <a
+                :class="{ disabled: !productsStore.ordersPagination.hasNextPage }"
+                class="page-link"
+                @click="changePage(productsStore.ordersPagination.currentPage + 1)"
+                >Next</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { computed, onMounted, ref } from "vue";
+import { onMounted, ref } from "vue";
 import { useProductsStore } from "@/stores/products";
 
 const productsStore = useProductsStore();
 
+// The Page Variable
+const MyOrdersPage = ref(null);
+
 // Variable to store the result of filter
 const filterWord = ref("all");
 
-// computed to filter the orders
-const ordersFiltering = computed(() => {
-  return productsStore.orders.filter((order) => {
-    if (filterWord.value === "all") {
-      return true;
-    } else {
-      return order.status === filterWord.value;
-    }
+const getOrdersFiltering = (search) => {
+  if (search === "All") {
+    filterWord.value = "all";
+    productsStore.getAllOrders();
+  } else {
+    filterWord.value = search;
+    productsStore.getAllOrders({ search });
+  }
+};
+
+const changePage = async (page) => {
+  MyOrdersPage.value?.scrollIntoView({
+    behavior: "smooth",
+    block: "start",
   });
-});
+
+  const limit = 6;
+  await productsStore.getAllOrders({ page, limit });
+};
 
 onMounted(async () => {
   await productsStore.getAllOrders();
+  console.log(productsStore.orders);
 });
 </script>
 
 <style lang="scss" scoped>
+.cursor-pointer {
+  cursor: pointer;
+}
 .filter {
   .state {
     cursor: pointer;
@@ -263,6 +323,23 @@ onMounted(async () => {
   .noOrders {
     top: 90% !important;
     width: 90% !important;
+  }
+}
+
+a.page-link {
+  border-color: #e5e7eb !important;
+  color: #6366f1 !important;
+  &:hover {
+    background-color: #eef2ff !important;
+    border-color: #6366f1 !important;
+  }
+  &.active {
+    background: linear-gradient(135deg, #6366f1, #7c3aed) !important;
+    color: white !important;
+    border-color: #6366f1 !important;
+  }
+  &.disabled {
+    color: gray !important;
   }
 }
 </style>

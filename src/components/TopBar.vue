@@ -81,4 +81,11 @@ onMounted(async () => {
     border-color: #6c4df6;
   }
 }
+.TopBar {
+  @media (max-width: 767px) {
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+}
 </style>

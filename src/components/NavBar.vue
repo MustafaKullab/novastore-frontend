@@ -92,7 +92,7 @@
             </div>
             <transition name="fade" mode="out-in">
               <div
-                class="menu rounded p-3 position-absolute shadow-sm"
+                class="menu rounded p-3 position-absolute shadow-sm border"
                 v-show="showMenu"
                 ref="menuElement"
               >

@@ -23,7 +23,7 @@
         >
           <div
             class="categoryBox text-center p-3 rounded d-flex flex-column justify-content-center align-items-center"
-            @click.prevent="categoryStore.setCategory(category._id)"
+            @click.prevent="updateProducts(category._id)"
             :class="{ active: categoryStore.selectedCategory === category._id }"
             style="min-height: 140px"
           >
@@ -47,11 +47,22 @@
 // import the store of category
 import { useCategoryStore } from "@/stores/category";
 import { onMounted } from "vue";
+import { useProductsStore } from "@/stores/products";
 const categoryStore = useCategoryStore();
+const productsStore = useProductsStore();
 
 // Function to clear flter
 const clearFilter = () => {
   categoryStore.selectedCategory = "All";
+
+  productsStore.getProducts({ categoryId: null });
+};
+
+const updateProducts = (categoryId) => {
+  categoryStore.selectedCategory = categoryId;
+  console.log("From cat page : " + categoryId);
+
+  productsStore.getProducts({ categoryId });
 };
 
 const apiUrl = import.meta.env.VITE_API_URL;
