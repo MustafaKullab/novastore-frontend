@@ -160,7 +160,7 @@
                         <div class="quantity">Quantity : {{ item.quantity }}X</div>
                       </div>
                       <div class="totalPrice fw-bold">
-                        ${{ item.quantity * item.productId.price }}
+                        ${{ (item.quantity * item.productId.price).toFixed(2) }}
                       </div>
                     </div>
                     <div class="delete" @click="deleteItem(item)">
