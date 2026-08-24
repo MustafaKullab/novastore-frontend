@@ -30,7 +30,7 @@
                 <div class="details">
                   <div class="title">Total Products</div>
                   <div class="number fw-bold fs-3" v-if="productsStore.totalProducts">
-                    {{ productsStore.totalProducts.toFixed(2) }}
+                    {{ productsStore.totalProducts }}
                   </div>
                 </div>
               </div>
@@ -95,7 +95,7 @@
                 </div>
                 <div class="details">
                   <div class="title">Revenue</div>
-                  <div class="number fw-bold fs-3">${{ productsStore.revenue }}</div>
+                  <div class="number fw-bold fs-3">${{ productsStore.revenue.toFixed(2) }}</div>
                 </div>
               </div>
             </div>
@@ -350,7 +350,7 @@ table {
     position: absolute;
     top: 53%;
     transform: translateY(-50%);
-    left: 8px;
+    left: 12px;
     width: 10px;
     height: 10px;
     border-radius: 50%;
