@@ -268,7 +268,7 @@
                         </div>
                       </th>
                       <td>
-                        <div class="mt-4">${{ (product.productId?.price).toFixeD(2) }}</div>
+                        <div class="mt-4">${{ (product.productId?.price).toFixed(2) }}</div>
                       </td>
                       <td>
                         <div class="mt-4">
