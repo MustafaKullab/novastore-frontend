@@ -145,7 +145,7 @@
                               :alt="order.userId.username"
                             />
                           </div>
-                          <div class="username">{{ order.userId.username || "Deleted User" }}</div>
+                          <div class="username">{{ order.userId?.username || "Deleted User" }}</div>
                         </div>
                       </td>
                       <td>{{ order.items.length }}</td>
