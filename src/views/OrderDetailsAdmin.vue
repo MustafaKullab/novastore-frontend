@@ -104,7 +104,7 @@
                 <div class="details">
                   <div class="title text-muted mb-2">Total Amount</div>
                   <div class="totalAmount fw-bold">
-                    ${{ productsStore.currentOrder.totalPrice }}
+                    ${{ productsStore.currentOrder.totalPrice.toFixed(2) }}
                   </div>
                 </div>
               </div>
@@ -268,7 +268,7 @@
                         </div>
                       </th>
                       <td>
-                        <div class="mt-4">${{ product.productId?.price }}</div>
+                        <div class="mt-4">${{ (product.productId?.price).toFixeD(2) }}</div>
                       </td>
                       <td>
                         <div class="mt-4">
@@ -277,7 +277,7 @@
                       </td>
                       <td>
                         <div class="mt-4">
-                          {{ product.quantity * product.productId?.price }}
+                          {{ (product.quantity * product.productId?.price).toFixed(2) }}
                         </div>
                       </td>
                     </tr>

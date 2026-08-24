@@ -162,7 +162,7 @@
                       </div>
                     </td>
                     <td>
-                      <div class="mt-3 text-center fw-bold">${{ order.totalPrice }}</div>
+                      <div class="mt-3 text-center fw-bold">${{ order.totalPrice.toFixed(2) }}</div>
                     </td>
                     <td>
                       <div

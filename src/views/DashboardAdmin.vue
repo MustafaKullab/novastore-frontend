@@ -30,7 +30,7 @@
                 <div class="details">
                   <div class="title">Total Products</div>
                   <div class="number fw-bold fs-3" v-if="productsStore.totalProducts">
-                    {{ productsStore.totalProducts }}
+                    {{ productsStore.totalProducts.toFixed(2) }}
                   </div>
                 </div>
               </div>
