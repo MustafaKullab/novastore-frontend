@@ -224,7 +224,9 @@
         </div>
         <div class="totalPrice d-flex justify-content-end gap-3 pb-4 pt-1">
           <div class="total fw-bold fs-5">Order Total</div>
-          <div class="price fs-5 fw-bold" style="color: var(--main-color)">${{ orderTotal }}</div>
+          <div class="price fs-5 fw-bold" style="color: var(--main-color)">
+            ${{ orderTotal.toFixed(2) }}
+          </div>
         </div>
         <hr />
         <div class="backToMyOrders" style="width: fit-content">
