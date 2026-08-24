@@ -95,7 +95,7 @@
                     </td>
                     <td class="fw-bold text-center pt-4 mt-3" style="white-space: nowrap">
                       <div class="mt-4">
-                        ${{ quantities[item.productId._id] * item.productId.price }}
+                        ${{ (quantities[item.productId._id] * item.productId.price).toFixed(2) }}
                       </div>
                     </td>
                     <td
