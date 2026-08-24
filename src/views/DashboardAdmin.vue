@@ -137,7 +137,7 @@
                       <th>{{ order._id.slice(0, 10) }}</th>
                       <td>
                         <div class="d-flex align-items-center gap-2">
-                          <div class="image">
+                          <div class="image" v-if="order.userId">
                             <img
                               class="rounded-pill"
                               :src="`${apiUrl}/${order.userId.avatar}`"
@@ -145,7 +145,7 @@
                               :alt="order.userId.username"
                             />
                           </div>
-                          <div class="username">{{ order.userId.username }}</div>
+                          <div class="username">{{ order.userId.username || "Deleted User" }}</div>
                         </div>
                       </td>
                       <td>{{ order.items.length }}</td>
