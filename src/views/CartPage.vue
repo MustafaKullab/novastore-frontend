@@ -94,7 +94,9 @@
                       </div>
                     </td>
                     <td class="fw-bold text-center pt-4 mt-3" style="white-space: nowrap">
-                      <div class="mt-4">${{ item.quantity * item.productId.price }}</div>
+                      <div class="mt-4">
+                        ${{ quantities[item.productId._id] * item.productId.price }}
+                      </div>
                     </td>
                     <td
                       class="delBtn text-center pt-4"
@@ -120,7 +122,7 @@
             <div class="subtotalShipping pb-2 border-bottom">
               <div class="subtotal pb-2 d-flex justify-content-between align-items-center">
                 <span>Subtotal ({{ productStore.cart.items.length }} items)</span>
-                <span>${{ subtotal }}</span>
+                <span>${{ subtotal.toFixed(2) }}</span>
               </div>
               <div class="shipping d-flex justify-content-between align-items-center">
                 <span>Shipping</span>
@@ -129,7 +131,9 @@
             </div>
             <div class="total py-2 d-flex justify-content-between align-items-center">
               <span class="fw-bold fs-4">Total</span>
-              <span class="fw-bold fs-4" style="color: var(--main-color)">${{ subtotal }}</span>
+              <span class="fw-bold fs-4" style="color: var(--main-color)"
+                >${{ subtotal.toFixed(2) }}</span
+              >
             </div>
             <div
               class="freeShippingMessage p-3 my-3 rounded d-flex justify-content-between align-items-center gap-3"
