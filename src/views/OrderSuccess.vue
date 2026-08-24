@@ -133,7 +133,7 @@
                 <div class="text">
                   <p class="m-0 mb-1 text-muted">Total amount</p>
                   <p class="fw-bold m-0 mb-1" v-if="productStore.currentOrder">
-                    ${{ productStore.currentOrder.totalPrice }}
+                    ${{ productStore.currentOrder.totalPrice.toFixed(2) }}
                   </p>
                   <p class="email m-0 text-muted" v-if="productStore.currentOrder">
                     {{ productStore.currentOrder.items.length }} Items

@@ -209,13 +209,15 @@
                   </div>
                   <div class="quantity fw-bold">Qty: {{ item.quantity }}</div>
                 </div>
-                <div class="totalPrice fw-bold">${{ item.quantity * item.productId.price }}</div>
+                <div class="totalPrice fw-bold">
+                  ${{ (item.quantity * item.productId.price).toFixed(2) }}
+                </div>
               </div>
             </div>
             <div class="subtotalAndShipping pb-3 mb-3 border-bottom">
               <div class="subtotal mb-2 d-flex align-items-center justify-content-between">
                 <span>Subtotal</span>
-                <span>${{ subtotal }}</span>
+                <span>${{ subtotal.toFixed(2) }}</span>
               </div>
               <div class="shipping d-flex align-items-center justify-content-between">
                 <span>Shipping</span>
@@ -224,7 +226,7 @@
             </div>
             <div class="total d-flex align-items-center justify-content-between">
               <h4>Total</h4>
-              <div class="totalPrice fs-4 fw-bold">${{ subtotal }}</div>
+              <div class="totalPrice fs-4 fw-bold">${{ subtotal.toFixed(2) }}</div>
             </div>
             <div class="btnConfOrder w-100 py-3 my-2">
               <button class="btn btn-mainColor w-100" @click="placeOrder">

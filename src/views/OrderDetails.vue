@@ -39,7 +39,7 @@
         v-if="productsStore.currentOrder"
       >
         <div
-          class="col-xxl-3 col-md-6 mb-3 mb-xxl-0 d-flex justify-content-between justify-content-lg-start align-items-center"
+          class="col-xxl-2 col-md-6 mb-3 mb-xxl-0 d-flex justify-content-between justify-content-lg-start align-items-center"
         >
           <div class="orderId d-flex gap-2">
             <div
@@ -61,7 +61,7 @@
           </div>
         </div>
         <div
-          class="col-xxl-2 col-md-6 mb-3 mb-xxl-0 d-flex justify-content-between justify-content-lg-start align-items-center"
+          class="col-xxl-3 col-md-6 mb-3 mb-xxl-0 d-flex justify-content-between justify-content-lg-start align-items-center"
         >
           <div class="ordDate d-flex gap-2">
             <div
@@ -122,7 +122,7 @@
           </div>
         </div>
         <div
-          class="col-xxl-2 col-md-6 mb-3 mb-xxl-0 d-flex justify-content-between justify-content-lg-start align-items-center"
+          class="col-xxl-3 col-md-6 mb-3 mb-xxl-0 d-flex justify-content-between justify-content-lg-start align-items-center"
         >
           <div class="ordPayMethod d-flex gap-2">
             <div
@@ -144,7 +144,7 @@
           </div>
         </div>
         <div
-          class="col-xxl-3 col-md-6 mb-3 mb-xxl-0 d-flex justify-content-between justify-content-lg-start align-items-center"
+          class="col-xxl-2 col-md-6 mb-3 mb-xxl-0 d-flex justify-content-between justify-content-lg-start align-items-center"
         >
           <div class="ordCustDetails d-flex gap-2">
             <div
@@ -208,13 +208,15 @@
                   </div>
                 </td>
                 <td class="pt-4 text-nowrap text-center text-md-start">
-                  <div style="padding-top: 15px">${{ item.productId?.price }}</div>
+                  <div style="padding-top: 15px">${{ (item.productId?.price).toFixed(2) }}</div>
                 </td>
                 <td class="pt-4 text-nowrap text-center text-md-start">
                   <div style="padding-top: 15px">{{ item.quantity }}</div>
                 </td>
                 <td class="fw-bold pt-4 text-nowrap text-center text-md-start">
-                  <div style="padding-top: 15px">${{ item.productId?.price * item.quantity }}</div>
+                  <div style="padding-top: 15px">
+                    ${{ (item.productId?.price * item.quantity).toFixed(2) }}
+                  </div>
                 </td>
               </tr>
             </tbody>

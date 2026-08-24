@@ -126,7 +126,7 @@
             </div>
             <div class="total mb-3 mb-lg-0">
               <div>Total</div>
-              <div class="fw-bold">${{ order.totalPrice }}</div>
+              <div class="fw-bold">${{ order.totalPrice.toFixed(2) }}</div>
             </div>
             <div class="status mb-3 mb-lg-0 text-center text-lg-start">
               <div class="mb-2">Status</div>
