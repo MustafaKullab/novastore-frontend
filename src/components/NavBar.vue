@@ -153,7 +153,9 @@
                         </div>
                         <div class="price">
                           Price :
-                          <span style="color: var(--main-color)">${{ (item.productId.price).toFixed(2) }}</span>
+                          <span style="color: var(--main-color)"
+                            >${{ item.productId.price.toFixed(2) }}</span
+                          >
                         </div>
                         <div class="quantity">Quantity : {{ item.quantity }}X</div>
                       </div>
@@ -182,7 +184,9 @@
                   </div>
                   <div class="total d-flex align-items-center justify-content-between">
                     <span class="fw-bold">Total</span>
-                    <span class="fw-bold" style="color: var(--main-color)">${{ subtotal }}</span>
+                    <span class="fw-bold" style="color: var(--main-color)"
+                      >${{ subtotal.toFixed(2) }}</span
+                    >
                   </div>
                 </div>
                 <div
