@@ -153,7 +153,7 @@
                         </div>
                         <div class="price">
                           Price :
-                          <span style="color: var(--main-color)">${{ item.productId.price }}</span>
+                          <span style="color: var(--main-color)">${{ (item.productId.price).toFixed(2) }}</span>
                         </div>
                         <div class="quantity">Quantity : {{ item.quantity }}X</div>
                       </div>
