@@ -229,7 +229,7 @@ const decreaseQuantity = async (item) => {
     try {
       loadingDec.value = true;
 
-      const response = await fetchWithRefresh("http://localhost:7000/decreaseQuantity", {
+      const response = await fetchWithRefresh(`${import.meta.env.VITE_API_URL}/decreaseQuantity`, {
         method: "POST",
         body: JSON.stringify({ productId: item.productId._id, quantity: 1 }),
         headers: { "Content-Type": "application/json" },
